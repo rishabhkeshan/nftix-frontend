@@ -14,6 +14,7 @@ import CreateEventScreen from "./pages/CreateEventScreen/CreateEventScreen";
 import EventBuyScreen from "./pages/EventBuyScreen/EventBuyScreen";
 import EventScreen from "./pages/MyEventsScreen/EventScreen";
 import TicketScreen from "./pages/MyTicketsScreen/TicketScreen";
+import TestScreen from "./pages/TesterScreen/TestScreen";
 
 //check user login or not
 // const token = localStorage.getItem("authorizationToken")
@@ -21,22 +22,23 @@ import TicketScreen from "./pages/MyTicketsScreen/TicketScreen";
 
 const App = () => (
   <Router>
-    <Header/>
+    <Header />
     <Switch>
-      <Route exact path="/" component={HomeScreen}/>
-      <Route exact path="/login" component={LoginScreen}/>
-      <Route exact path="/signup" component={SignupScreen}/>
-      <Route exact path="/verify" component={VerifyOTPScreen}/>
-      <Route exact path="/mytickets" component={MyTicketsScreen}/>
-      <Route exact path="/myevents" component={MyEventsScreen}/>
-      <Route exact path="/about" component={AboutScreen}/>
-      <Route exact path="/profile" component={ProfileScreen}/>
-      <Route exact path="/create" component={CreateEventScreen}/>
-      <Route exact path="/event/:_id" component={EventBuyScreen}/>
-      <Route exact path="/myevent/:_id" component={EventScreen}/>
-      <Route exact path="/ticket/:_id" component={TicketScreen}/>
+      <Route exact path="/" component={HomeScreen} />
+      <Route exact path="/login" component={LoginScreen} />
+      <Route exact path="/signup" component={SignupScreen} />
+      <Route exact path="/verify" component={VerifyOTPScreen} />
+      <Route exact path="/mytickets" component={MyTicketsScreen} />
+      <Route exact path="/myevents" component={MyEventsScreen} />
+      <Route exact path="/about" component={AboutScreen} />
+      <Route exact path="/profile" component={ProfileScreen} />
+      <Route exact path="/create" component={CreateEventScreen} />
+      <Route exact path="/event/:_id" component={EventBuyScreen} />
+      <Route exact path="/myevent/:_id" component={EventScreen} />
+      <Route exact path="/ticket/:_id" component={TicketScreen} />
+      <Route exact path="/test" component={TestScreen} />
     </Switch>
-    <Footer/>
+    <Footer />
   </Router>
 );
 
