@@ -1,0 +1,47 @@
+.loginscreen{
+    @apply pt-32;
+    width: 100vw;
+    color: white;
+    &_maincontainer{
+        @apply px-6 w-full;
+        &_title{
+            @apply text-2xl font-bold;
+        }
+        &_inputcontainer{
+            @apply w-full mt-8;
+            &_inputfield{
+                 
+            }
+        }
+        &_OTPcontainer{
+            @apply w-full mt-8;
+            color: black;
+            div{
+                @apply w-full justify-center items-center;
+                input{
+                    @apply text-white;
+                    border: 2px solid #4A90E2;
+                    background-color: inherit;
+                    border-radius: 4px;
+                    height: 48px !important;
+                    width: 48px !important;
+                }
+            }
+            
+        }
+    }
+    &_bottomcontainer{
+        @apply fixed flex flex-col bottom-8 items-center justify-center w-full;
+        &_textcontainer{
+            @apply text-sm;
+            &_highlighttext{
+                color: #4A90E2;
+                text-decoration: underline;
+            }
+        }
+        &_btncontainer{
+        @apply px-6 py-3 justify-center items-center rounded-xl mt-2 w-48 text-center;
+        background-color: #074286;
+        }
+    }
+}

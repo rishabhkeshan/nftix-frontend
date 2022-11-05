@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import HomeScreen from "./pages/HomeScreen/HomeScreen";
+import Header from "./components/Header/Header";
+import LoginScreen from "./pages/LoginSignupScreen/LoginScreen";
+import SignupScreen from "./pages/LoginSignupScreen/SignupScreen";
+import VerifyOTPScreen from "./pages/LoginSignupScreen/VerifyOTPScreen";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+//check user login or not
+// const token = localStorage.getItem("authorizationToken")
+// const loggedInUser = JSON.parse(localStorage.getItem("user"))
+
+const App = () => (
+  <Router>
+    <Header/>
+    <Switch>
+      <Route exact path="/" component={HomeScreen}/>
+      <Route exact path="/login" component={LoginScreen}/>
+      <Route exact path="/signup" component={SignupScreen}/>
+      <Route exact path="/verify" component={VerifyOTPScreen}/>
+    </Switch>
+  </Router>
+);
 
 export default App;

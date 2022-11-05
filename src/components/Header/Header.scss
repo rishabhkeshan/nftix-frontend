@@ -1,0 +1,13 @@
+.header{
+    @apply fixed w-screen flex items-center justify-between p-5 top-0 mb-5 bg-black;
+    &_logo{
+        &_img{
+            height: 30px;
+        }
+    }
+    &_login{
+        @apply px-6 py-3 justify-center items-center rounded-xl;
+        background-color: #074286;
+        color: white;
+    }
+}
