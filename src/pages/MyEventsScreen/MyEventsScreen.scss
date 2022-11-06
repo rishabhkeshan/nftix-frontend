@@ -13,7 +13,7 @@
         }
     }
     &_eventscontainer{
-        @apply flex flex-wrap gap-5 mt-8;
+        @apply flex flex-wrap gap-5 mt-8 justify-between;
         &_event{
             @apply flex flex-col w-40 justify-start items-start rounded-xl;
             background-color: #1D2126;

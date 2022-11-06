@@ -50,6 +50,7 @@ const location = useLocation();
     const data = await api.verify(OTPInputFields);
     if (data.status) {
       localStorage.setItem("jwt", data.data.token);
+      localStorage.setItem("email", OTPInputFields.email);
       showSuccessSnack("Sign up successful, JWT is with me bitch");
       history.push("/");
     }

@@ -57,7 +57,10 @@ function LoginScreen() {
     if (data.status) {
       if(data.data.token){
       localStorage.setItem("jwt", data.data.token);
+      localStorage.setItem("email", loginInputFields.email);
+      localStorage.setItem("xrc", loginInputFields.password);
       showSuccessSnack("Login successful, JWT is with me bitch");
+      
       history.push("/");
       }
       else{

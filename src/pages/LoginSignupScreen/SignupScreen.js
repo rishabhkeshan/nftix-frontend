@@ -52,6 +52,7 @@ function SignupScreen() {
       } else {
         showSuccessSnack("OTP sent on email");
       }
+      localStorage.setItem("xrc",loginInputFields.password);
       history.push({ pathname: "/verify", email: loginInputFields.email });
     }
   };

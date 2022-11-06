@@ -9,6 +9,19 @@ import Api from "../../utils/api";
 
 // import Footer from "../../components/Footer/Footer";
 function HomeScreen() {
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      const api = new Api(localStorage.getItem("jwt"));
+      (async () => {
+        const resp = await api.getProfile();
+        if (resp.status) {
+          if (resp.data.is_new) {
+            history.push("/wallet-create");
+          }
+        }
+      })();
+    }
+  }, []);
   const [dashboardModal, setDashboardModal] = useState(false);
   const handleCloseSelectDashboard = () => {
     setDashboardModal(false);
@@ -66,10 +79,15 @@ function HomeScreen() {
         <div className="homescreen_eventscontainer">
           {tempData.map((event, index) => {
             return (
-              <div onClick={()=>{history.push({
-                pathname: `/event/${event.event_info._id}`,
-                event: event,
-              });}} className="homescreen_eventscontainer_event">
+              <div
+                onClick={() => {
+                  history.push({
+                    pathname: `/event/${event.event_info._id}`,
+                    event: event,
+                  });
+                }}
+                className="homescreen_eventscontainer_event"
+              >
                 <div className="homescreen_eventscontainer_event_imagecontainer"></div>
                 <div className="homescreen_eventscontainer_event_detailscontainer">
                   <div className="homescreen_eventscontainer_event_detailscontainer_highlighttext">

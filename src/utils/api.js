@@ -29,6 +29,47 @@ export default class Api {
       return err.response.data;
     }
   }
+  async walletUpdate(walletData) {
+    try {
+      const resp = await Axios({
+        method: "post",
+        url: this.backendURL + `/user/wallet`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+        data: walletData,
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+  async getProfile() {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/user/profile`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
   async verify(OTPData) {
     try {
       const resp = await Axios({

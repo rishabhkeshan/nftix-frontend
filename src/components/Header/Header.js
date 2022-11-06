@@ -15,7 +15,8 @@ export default function Header() {
     if (
       routePath === "/signup" ||
       routePath === "/login" ||
-      routePath === "/verify"
+      routePath === "/verify" ||
+      routePath === "/wallet-create"
     )
     {
       setVisible(false);

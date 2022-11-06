@@ -193,6 +193,7 @@ class AssetMantleFunctions {
     return {
       walletId: this.walletId,
       nubId: this.nubID,
+      mnemonic: wallet.mnemonic,
     };
   }
 

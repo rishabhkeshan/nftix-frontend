@@ -20,7 +20,8 @@ export default function Footer() {
     if (
       routePath === "/signup" ||
       routePath === "/login" ||
-      routePath === "/verify"
+      routePath === "/verify" ||
+      routePath === "/wallet-create"
     ) {
       setVisible(false);
       console.log("hi");

@@ -7,6 +7,13 @@
         &_title{
             @apply text-2xl font-bold;
         }
+        &_textcontainer{
+            @apply p-3 flex justify-center items-center rounded-md mt-6;
+            background-color: #1D2126;
+        }
+        &_subtitle{
+            @apply text-xl font-semibold mt-6;
+        }
         &_inputcontainer{
             @apply w-full mt-8;
             &_inputfield{
