@@ -5,7 +5,7 @@ import Dropzone, { useDropzone } from "react-dropzone";
 import { useSnackbar } from "notistack";
 
 function NFTDropzone({
-  state,
+  type,
   handleDrop,
   height,
 }) {
@@ -35,13 +35,13 @@ function NFTDropzone({
     fileUploaded.status = true;
     fileUploaded.name = file.name;
     fileUploaded.data = file;
-    fileUploaded.type = "image";
+    fileUploaded.type = type;
 
     const fileSize = file.size / 1024 / 1024;
 
     if (fileSize > 30) {
       enqueueSnackbar(
-        `Uploaded ${fileUploaded.type} should be less than 30MB`,
+        `Uploaded ${fileUploaded.type} image should be less than 30MB`,
         { variant: "error" }
       );
     } else {

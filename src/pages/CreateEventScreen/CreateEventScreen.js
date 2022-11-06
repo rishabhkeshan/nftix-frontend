@@ -7,20 +7,12 @@ import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
 import plus_icon from "../../assets/plus_icon.svg";
 import NFTDropzone from "./NFTDropzone";
-
 export default function CreateEventScreen() {
-  const [nftUploadStatus, setNftUploadStatus] = useState(false);
-  const [imageFile, setImageFile] = useState(null);
-  const [previewImg, setPreviewImg] = useState(null);
+    const [contestImage, setContestImage] = useState(null);
+    const [nftImage, setNFTImage] = useState(null);
   const api = new Api(localStorage.getItem("jwt"));
 
-  const [state, setState] = useState({
-    ipfsHash: "",
-    nftUrl: "",
-    fileUploaded: { status: false, name: "", type: "" },
-    buffer: null,
-    isReset: true,
-  });
+
   const [eventInputFields, setEventInputFields] = useState({
     name: "",
     location: "",
@@ -90,32 +82,17 @@ export default function CreateEventScreen() {
     }
     return bytes.buffer;
   };
-  const handleImageUpload = () => {
-    setNftUploadStatus(true);
-  };
-  const handleNFTData = (file, buffer, category) => {
-    setState((oldState) => ({
-      ...oldState,
-      fileUploaded: file,
-      isReset: false,
-      buffer: buffer,
-    }));
-  };
+
   const handleDrop = (file) => {
     let reader = new window.FileReader();
     reader.readAsDataURL(file.data);
     reader.onloadend = () => {
       let arrayBuff = null;
       arrayBuff = _base64ToArrayBuffer(reader.result.split(",")[1]);
-      handleNFTData(file, arrayBuff, "NFT");
-      handleImageUpload();
-      if (file.type === "image") {
-        setImageFile(reader.result);
-        setPreviewImg(reader.result);
-        console.log(imageFile);
-        handleNFTData(file, arrayBuff, "Thumbnail");
+      if (file.type === "contest") {
+        setContestImage(arrayBuff);
       } else {
-        setPreviewImg(false);
+        setNFTImage(arrayBuff);
       }
     };
   };
@@ -146,7 +123,7 @@ export default function CreateEventScreen() {
 
         <div className="createventscreen_maincontainer_inputcontainer">
           <div className="flex justify-center items-center">
-            <NFTDropzone state={state} handleDrop={handleDrop} height="h-80" />
+            <NFTDropzone type={"contest"} handleDrop={handleDrop} height="h-80" />
           </div>
           <div className="createventscreen_maincontainer_subtext justify-center items-center text-center m-0 p-0">
             Upload Event Banner
@@ -238,7 +215,7 @@ export default function CreateEventScreen() {
             NFT Details
           </div>
           <div className="flex justify-center items-center">
-            <NFTDropzone state={state} handleDrop={handleDrop} height="h-64" />
+            <NFTDropzone type={"nft"} handleDrop={handleDrop} height="h-64" />
           </div>{" "}
           <div className="createventscreen_maincontainer_subtext justify-center items-center text-center m-0 p-0">
             Upload NFT Image
