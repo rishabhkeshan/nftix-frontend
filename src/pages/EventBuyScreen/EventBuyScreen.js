@@ -1,11 +1,16 @@
 import "./EventBuyScreen.scss";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
+import PasswordModal from "./PasswordModal";
 export default function EventBuyScreen({ match }) {
   useEffect(() => {
     console.log(match.params.ticker);
   }, []);
+    const [passwordModal, setPasswordModal] = useState(false);
+    const handleClose = () => {
+      setPasswordModal(false);
+    };
   const event = {
     event_info: {
       _id: "63667fe1e08d08237aefe57b",
@@ -27,7 +32,11 @@ export default function EventBuyScreen({ match }) {
     },
   };
   return (
-    <article className="eventbuyscreen">
+    <article
+      style={{ filter: passwordModal ? "blur(10px)" : "none" }}
+      className="eventbuyscreen"
+    >
+      <PasswordModal passwordModal={passwordModal} handleClose={handleClose} />
       <section className="eventbuyscreen_maincontainer">
         <div className="eventbuyscreen_eventcontainer">
           <div className="eventbuyscreen_eventcontainer_event">
@@ -78,7 +87,12 @@ export default function EventBuyScreen({ match }) {
                   />
                   {event.nft_info.location}
                 </div>
-                <div className="eventbuyscreen_nftcontainer_event_detailscontainer_buycontainer">
+                <div
+                  onClick={() => {
+                    setPasswordModal(true);
+                  }}
+                  className="eventbuyscreen_nftcontainer_event_detailscontainer_buycontainer"
+                >
                   Buy for 5 MNTL
                 </div>
               </div>
