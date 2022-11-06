@@ -12,6 +12,8 @@ import ProfileScreen from "./pages/ProfileScreen/ProfileScreen";
 import MyEventsScreen from "./pages/MyEventsScreen/MyEventsScreen";
 import CreateEventScreen from "./pages/CreateEventScreen/CreateEventScreen";
 import EventBuyScreen from "./pages/EventBuyScreen/EventBuyScreen";
+import EventScreen from "./pages/MyEventsScreen/EventScreen";
+import TicketScreen from "./pages/MyTicketsScreen/TicketScreen";
 
 //check user login or not
 // const token = localStorage.getItem("authorizationToken")
@@ -31,8 +33,8 @@ const App = () => (
       <Route exact path="/profile" component={ProfileScreen}/>
       <Route exact path="/create" component={CreateEventScreen}/>
       <Route exact path="/event/:_id" component={EventBuyScreen}/>
-
-
+      <Route exact path="/myevent/:_id" component={EventScreen}/>
+      <Route exact path="/ticket/:_id" component={TicketScreen}/>
     </Switch>
     <Footer/>
   </Router>

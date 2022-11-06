@@ -19,7 +19,7 @@
             background-color: #1D2126;
             &_imagecontainer{
                 background-color: #181B1F;
-                @apply h-40 w-40 rounded-xl;
+                @apply h-40 w-40 rounded-xl flex justify-center items-center;
 
             }
             &_detailscontainer{
