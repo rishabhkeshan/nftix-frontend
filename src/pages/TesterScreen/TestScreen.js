@@ -1,15 +1,28 @@
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 
 function TestScreen() {
-  const assetMantleClass = new AssetMantleFunctions();
+  const assetMantleClass = new AssetMantleFunctions("ggwp");
 
   const createWallet = async () => {
     console.log("creating wallet");
     await assetMantleClass.createWallet("ggwp");
   };
 
-  const mintToken = () => {
+  const mintToken = async () => {
     console.log("minting token");
+    await assetMantleClass.walletFromWords(
+      ""
+    );
+    const propertiesArray = [
+      { propertyName: "location", propertyValue: "ggwp" },
+      { propertyName: "organisationName", propertyValue: "ggwp" },
+      { propertyName: "date", propertyValue: "ggwp" },
+    ];
+    const image =
+      "https://demo-assetmantle.mypinata.cloud/ipfs/QmZuNgMqiU4iymkuj57SEjLR4GBawpH8V5gK3aR3gHDBtc/gg.png";
+    const name = "ggwp";
+    const desc = "ggwp";
+    await assetMantleClass.mintToken(name, desc, image, propertiesArray);
   };
 
   const transactMntl = async () => {
