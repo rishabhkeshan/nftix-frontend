@@ -189,7 +189,11 @@ class AssetMantleFunctions {
     this.walletId = account[0].address;
     this.wallet = wallet;
     await this.checkFaucet(this.walletId);
-    this.createNubId(this.username);
+    await this.createNubId(this.username);
+    return {
+      walletId: this.walletId,
+      nubId: this.nubID,
+    };
   }
 
   async checkFaucet() {
