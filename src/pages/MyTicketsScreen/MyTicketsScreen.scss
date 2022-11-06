@@ -1,0 +1,48 @@
+
+.myticketsscreen{
+    @apply pt-32 mb-32;
+    width: 100vw;
+    color: white;
+    height: 100%;
+    overflow-y: scroll;
+    &_maincontainer{
+        @apply px-6 w-full;
+        &_createevent{
+            @apply flex w-full justify-center items-center text-2xl font-bold px-4 py-3 rounded-2xl;
+            background-color: #074286;
+        }
+    }
+    &_eventscontainer{
+        @apply flex flex-col gap-5 mt-8;
+        &_event{
+            @apply flex flex-row w-full justify-start items-start rounded-xl;
+            background-color: #1D2126;
+            &_imagecontainer{
+                background-color: #181B1F;
+                @apply h-40 w-40 rounded-xl;
+
+            }
+            &_detailscontainer{
+                @apply p-2;
+            &_highlighttext{
+                font-size: 9px;
+                color: #EB5757;
+            }
+            &_title{
+                @apply text-xs font-bold py-2;
+            }
+            &_subtitle{
+                font-size: 10px;
+                @apply flex items-center text-center;
+            }
+            
+            &_subtext{
+                font-size: 10px;
+                @apply flex items-center text-center;
+                color: #A9A9A9;
+            }
+            
+        }
+        }
+    }
+}

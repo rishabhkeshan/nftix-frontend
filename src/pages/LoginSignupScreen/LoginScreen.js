@@ -9,7 +9,11 @@ import { useSnackbar } from "notistack";
 
 function LoginScreen() {
   const [dashboardModal, setDashboardModal] = useState(false);
-  const [loginInputFields, setLoginInputFields] = useState({email:'',password:''});
+  const [loginInputFields, setLoginInputFields] = useState({
+    email: "",
+    password: "",
+    org_application: true,
+  });
   const api = new Api();
   let history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -41,9 +45,27 @@ function LoginScreen() {
   const handleSubmit = async () => {
     console.log(loginInputFields);
     const data = await api.signup(loginInputFields);
+          if (data === "err") {
+            // localStorage.clear();
+            // localStorage.setItem(
+            //   "err",
+            //   "Something went wrong!"
+            // );
+            showErrorSnack("Something went wrong");
+            return;
+          }
     if (data.status) {
-      localStorage.setItem("jwt", data.token);
+      if(data.data.token){
+      localStorage.setItem("jwt", data.data.token);
       showSuccessSnack("Login successful, JWT is with me bitch");
+      history.push("/");
+      }
+      else{
+        showErrorSnack("Please check if you have an account");
+      }
+    } else{
+      showErrorSnack(data?.description);
+      return;
     }
   };
   const inputStyle = {

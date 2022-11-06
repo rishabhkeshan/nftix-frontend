@@ -5,11 +5,13 @@ import nftixLogo from "../../assets/nftix_logo_white.svg";
 
 export default function Header() {
   const [visible, setVisible] = useState(true);
-    const location = useLocation();
+  const location = useLocation();
+  const routePath = location.pathname;
+  const [loggedIn,setLoggedIn] = useState(localStorage.getItem("jwt")!==null);
 
+  
   useEffect(() => {
-    const routePath=location.pathname;
-    
+    setLoggedIn(localStorage.getItem("jwt") !== null);
     if (
       routePath === "/signup" ||
       routePath === "/login" ||
@@ -21,7 +23,7 @@ export default function Header() {
     }
     else
     setVisible(true);
-  }, [location]);
+  }, [location,localStorage]);
 
   return (
     <div className="header">
@@ -33,7 +35,7 @@ export default function Header() {
       {visible && (
         <div className="header_login">
           <Link className="header_login_btn" to="/login">
-            Log In
+            {loggedIn?"Rishabh":"Login"}
           </Link>
         </div>
       )}

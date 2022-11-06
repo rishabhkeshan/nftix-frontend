@@ -1,0 +1,36 @@
+.footer{
+    @apply fixed w-screen flex items-center justify-between p-5 bottom-0 bg-black z-50;
+    &_logo{
+        &_img{
+            height: 30px;
+        }
+    }
+    &_login{
+        @apply px-6 py-3 justify-center items-center rounded-xl;
+        background-color: #074286;
+        color: white;
+    }
+    &_navcontainer{
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        &_tabcontainer{
+        display: flex;
+        padding: 8px 12px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img{
+            height: 24px;
+        }
+        div{
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        }
+    }
+
+}

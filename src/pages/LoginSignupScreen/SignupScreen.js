@@ -6,16 +6,17 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
-  
+
 function SignupScreen() {
   const api = new Api();
   let history = useHistory();
   const [dashboardModal, setDashboardModal] = useState(false);
-    const [loginInputFields, setLoginInputFields] = useState({
-      email: "",
-      password: "",
-      username:"",
-    });
+  const [loginInputFields, setLoginInputFields] = useState({
+    email: "",
+    password: "",
+    username: "",
+    org_application: true,
+  });
   const { enqueueSnackbar } = useSnackbar();
   const showErrorSnack = (message) => {
     enqueueSnackbar(message, {
@@ -28,28 +29,32 @@ function SignupScreen() {
       },
     });
   };
-    const showSuccessSnack = (message) => {
-      enqueueSnackbar(message, {
-        variant: "success",
-        preventDuplicate: true,
-        autoHideDuration: 3000,
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right",
-        },
-      });
-    };
+  const showSuccessSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "success",
+      preventDuplicate: true,
+      autoHideDuration: 3000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "right",
+      },
+    });
+  };
   const handleCloseSelectDashboard = () => {
     setDashboardModal(false);
   };
-  const handleSubmit = async ()=>{
+  const handleSubmit = async () => {
     console.log(loginInputFields);
     const data = await api.signup(loginInputFields);
-    if(data.status){
-      showSuccessSnack("OTP sent on email");
-      history.push({pathname:'/verify',email:loginInputFields.email});
+    if (data.status) {
+      if (data.alreadySent) {
+        showSuccessSnack("OTP already sent on email");
+      } else {
+        showSuccessSnack("OTP sent on email");
+      }
+      history.push({ pathname: "/verify", email: loginInputFields.email });
     }
-  }
+  };
   const inputStyle = {
     "& .MuiOutlinedInput-root": {
       "& > fieldset": {
@@ -127,7 +132,12 @@ function SignupScreen() {
             <Link to="/login"> Log In</Link>
           </span>
         </div>
-        <div onClick={handleSubmit} className="loginscreen_bottomcontainer_btncontainer">Continue</div>
+        <div
+          onClick={handleSubmit}
+          className="loginscreen_bottomcontainer_btncontainer"
+        >
+          Continue
+        </div>
       </section>
     </article>
   );

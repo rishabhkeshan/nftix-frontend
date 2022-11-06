@@ -1,0 +1,40 @@
+.createventscreen{
+    @apply pt-32;
+    width: 100vw;
+    color: white;
+    height: 100%;
+    margin-bottom: 8rem;
+    overflow-y: scroll;
+    &_maincontainer{
+        @apply px-6 w-full;
+        &_title{
+            @apply text-2xl font-bold;
+        }
+        &_subtitle{
+            @apply text-xl my-3 mt-8 font-semibold;
+        }
+        &_subtext{
+            @apply text-lg my-3 font-medium;
+        }
+        &_inputcontainer{
+            @apply w-full mt-2;
+            &_inputfield{
+                 
+            }
+        }
+    }
+    &_bottomcontainer{
+        @apply flex flex-col bottom-8 items-center justify-center w-full;
+        &_textcontainer{
+            @apply text-sm;
+            &_highlighttext{
+                color: #4A90E2;
+                text-decoration: underline;
+            }
+        }
+        &_btncontainer{
+        @apply px-6 py-3 justify-center items-center rounded-xl mt-2 w-48 text-center;
+        background-color: #074286;
+        }
+    }
+}

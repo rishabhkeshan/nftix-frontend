@@ -1,7 +1,7 @@
 import "./LoginScreen.scss";
 
 // import Footer from "../../components/Footer/Footer";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import OtpInput from "react-otp-input";
@@ -9,12 +9,13 @@ import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
 
 function VerifyOTPScreen() {
-  const location = useLocation();
+const location = useLocation();
   const api = new Api();
+  let history = useHistory();
 
   const [dashboardModal, setDashboardModal] = useState(false);
   const [OTPInputFields, setOTPInputFields] = useState({
-    email: "rishabh.r@hungama.com",
+    email: location.email,
     OTP: "",
   });
 
@@ -48,9 +49,9 @@ function VerifyOTPScreen() {
     console.log(OTPInputFields);
     const data = await api.verify(OTPInputFields);
     if (data.status) {
-      localStorage.setItem("jwt", data.token);
-
+      localStorage.setItem("jwt", data.data.token);
       showSuccessSnack("Sign up successful, JWT is with me bitch");
+      history.push("/");
     }
   };
   const inputStyle = {

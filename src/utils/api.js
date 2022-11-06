@@ -11,12 +11,19 @@ export default class Api {
         url: this.backendURL + `/auth/login`,
         data: signupData,
       });
-      return resp.data;
+      if (resp.status === 204) {
+        const response = { status: true, alreadySent: true };
+        return response;
+      } else return resp.data;
     } catch (err) {
       if (!err.response) {
         return "err";
       }
-      if (err.response.status === 500 || err.response.status === 400) {
+      if (err.response.status === 204) {
+        const response = { status: true, alreadySent: true };
+        return response;
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
         return "err";
       }
       return err.response.data;
@@ -35,6 +42,47 @@ export default class Api {
         return "err";
       }
       if (err.response.status === 500 || err.response.status === 400) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+  async addEvent(eventData) {
+    try {
+      const resp = await Axios({
+        method: "post",
+        url: this.backendURL + `/org/event`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+        data: eventData,
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+  async getEvent(eventData) {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/org/event`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
         return "err";
       }
       return err.response.data;
