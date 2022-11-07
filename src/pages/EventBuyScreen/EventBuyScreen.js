@@ -127,7 +127,7 @@ export default function EventBuyScreen({ match }) {
     await mantleFunctions.walletFromWords(nem);
     console.log(event.nft_info.properties);
     const data = await mantleFunctions.mintToken(
-      event.nft_info.name,
+      `${event.nft_info.name}_${event.event_info.tickets_available}`,
       event.nft_info.description,
       event.nft_info.image,
       event.nft_info.properties
