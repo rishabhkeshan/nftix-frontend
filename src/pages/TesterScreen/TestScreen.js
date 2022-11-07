@@ -11,6 +11,7 @@ function TestScreen() {
       );
       const resp = await assetMantleClass.getAccountBalance();
       console.log(resp);
+      console.log(await assetMantleClass.getUsernameExists())
     })();
   }, []);
 

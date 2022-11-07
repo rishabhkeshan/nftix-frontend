@@ -26,6 +26,7 @@ const routes = {
   faucet: `https://faucet.devnet.assetmantle.one/faucet`,
   tx: `${baseURL}/txs`,
   mint: `${baseURL}/xprt/assets/mint`,
+  identities: `${baseURL}/xprt/identities/identities`,
 };
 
 const sendPostRequest = async (url, payload) => {
@@ -297,6 +298,14 @@ class AssetMantleFunctions {
   async getAccountBalance() {
     const resp = await getAccount(this.walletId);
     return parseInt(resp.account.result.value.coins[0].amount) / 1000000;
+  }
+
+  async getUsernameExists() {
+    const resp = await sendGetRequest(`${routes.identities}/${this.nubID}`);
+    if (resp.result.value.identities.value.list) {
+      return true;
+    }
+    return false;
   }
 }
 

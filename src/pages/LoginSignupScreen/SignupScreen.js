@@ -6,6 +6,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
+import AssetMantleFunctions from "../../blockchain/assetmantle";
 
 function SignupScreen() {
   const api = new Api();
@@ -45,6 +46,12 @@ function SignupScreen() {
   };
   const handleSubmit = async () => {
     console.log(loginInputFields);
+    const mantleFunctions = new AssetMantleFunctions(loginInputFields.username);
+    const sanity = await mantleFunctions.getUsernameExists();
+    if(sanity){
+      showErrorSnack("Sorry this username is already taken!")
+      return;
+    }
     const data = await api.signup(loginInputFields);
     if (data.status) {
       if (data.alreadySent) {
