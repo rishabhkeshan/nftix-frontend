@@ -293,6 +293,11 @@ class AssetMantleFunctions {
     };
     return broadcastReq;
   }
+
+  async getAccountBalance() {
+    const resp = await getAccount(this.walletId);
+    return parseInt(resp.account.result.value.coins[0].amount)/1000000;
+  }
 }
 
 export default AssetMantleFunctions;
