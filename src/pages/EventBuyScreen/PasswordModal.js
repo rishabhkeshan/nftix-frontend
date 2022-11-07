@@ -26,7 +26,7 @@ export default function PasswordModal({passwordModal,handleClose}) {
       onClose={handleClose}
       aria-labelledby="nft-buy"
       aria-describedby="password-enter"
-      className="flex justify-center items-center"
+      className="flex justify-center items-center modal outline-none"
     >
       <div style={{backgroundColor:"#000000"}} className="w-80 p-8 rounded-xl">
         <div className="font-bold text-xl mb-3">Sign Transaction</div>

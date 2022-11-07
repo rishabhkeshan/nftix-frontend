@@ -1,10 +1,15 @@
 import "./LoginScreen.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 import Api from "../../utils/api";
+import Loader from "../../components/Loader/Loader";
 
 export default function WalletCreationScreen() {
+  const [showLoading,setShowLoading]=useState(false);
+  useEffect(() => {
+    handleSubmit();
+  }, []);
   const mantleFunctions = new AssetMantleFunctions(
     localStorage.getItem("email")
   );
@@ -18,6 +23,7 @@ export default function WalletCreationScreen() {
     ).toString();
   };
   const handleSubmit = async () => {
+    setShowLoading(true);
     const resp = await mantleFunctions.createWallet();
     const walletUpdateResponse = await api.walletUpdate({
       wallet_id: resp.walletId,
@@ -26,6 +32,7 @@ export default function WalletCreationScreen() {
     });
     setWalletAddress(resp.walletId);
     setMnemonic(resp.mnemonic);
+    setShowLoading(false);
     //localStorage.removeItem("xrc");
   };
   const downloadTxtFile = () => {
@@ -39,9 +46,13 @@ export default function WalletCreationScreen() {
     element.click();
   };
   return (
-    <article className="loginscreen">
+    <article
+      style={{ filter: showLoading ? "blur(10px)" : "none" }}
+      className="loginscreen"
+    >
+      <Loader showLoading={showLoading} />
       <section className="loginscreen_maincontainer">
-        <div onClick={handleSubmit} className="loginscreen_maincontainer_title">
+        <div className="loginscreen_maincontainer_title">
           Wallet Address
         </div>
         <div
