@@ -161,7 +161,7 @@ export default function EventBuyScreen({ match }) {
   };
   return (
     <article
-      style={{ filter: passwordModal ? "blur(10px)" : "none" }}
+      style={{ filter: passwordModal || showLoading ? "blur(10px)" : "none" }}
       className="eventbuyscreen"
     >
       <Loader showLoading={showLoading} />

@@ -10,6 +10,8 @@ export default function MyEventsScreen() {
   const api = new Api(localStorage.getItem("jwt"));
   const [tempData, setTempData] = useState([]);
   const [eventsData, setEventsData] = useState("");
+    const [showLoading, setShowLoading] = useState(true);
+
   const history = useHistory();
   useEffect(() => {
     (async () => {
@@ -19,6 +21,7 @@ export default function MyEventsScreen() {
         if (data.data) {
           setTempData(data.data);
         }
+        setShowLoading(false);
         console.log(data.data);
       }
     })();
@@ -69,7 +72,11 @@ export default function MyEventsScreen() {
   // ];
 
   return (
-    <div className="eventsscreen">
+    <div
+      style={{ filter: showLoading ? "blur(10px)" : "none" }}
+      className="eventsscreen"
+    >
+      <Loader showLoading={showLoading} />
       <div className="eventsscreen_maincontainer">
         <Link to="/create" className="eventsscreen_maincontainer_createevent">
           Create a new event here!

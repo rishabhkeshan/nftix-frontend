@@ -4,9 +4,12 @@ import nftix_logo from "../../assets/nftix_logo_white.svg";
 import { QrReader } from "react-qr-reader";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { useSnackbar } from "notistack";
+import Api from "../../utils/api";
 
 export default function QRScanModal({ showScanner, setShowScanner }) {
 const [data, setData] = useState("No result");
+  const api = new Api(localStorage.getItem("jwt"));
+
   const { enqueueSnackbar } = useSnackbar();
   const showErrorSnack = (message) => {
     enqueueSnackbar(message, {
@@ -30,6 +33,23 @@ const [data, setData] = useState("No result");
       },
     });
   };
+  const handleData = async(payload)=>{
+    if(payload.ticket_id){
+      console.log("hi");
+      if(payload.claimable){
+        const resp = await api.claim(payload);
+        if(resp.status){
+          showSuccessSnack(resp.data);
+        }
+
+      } else{
+        const resp = await api.markAttendance(payload);
+        if (resp.status) {
+          showSuccessSnack(resp.data);
+        }
+      }
+    }
+  }
   return (
     <Modal
       open={showScanner}
@@ -55,10 +75,13 @@ const [data, setData] = useState("No result");
         <BarcodeScannerComponent
           width={500}
           height={500}
+          delay={3000}
           onUpdate={(err, result) => {
             if (result) {
-              showSuccessSnack(result?.text);
-              setData(result.text);
+              showSuccessSnack("Scanned, please wait!")
+              handleData(JSON.parse(result?.text));
+              console.log(result?.text);
+              setData(result?.text);
             } else setData("Not Found");
           }}
         />

@@ -25,6 +25,7 @@ export default function TicketScreen({ match }) {
       claimed: [],
       claimable: ["Samosa"],
       timeOfAttendance: "0001-01-01T00:00:00Z",
+      attendance:false,
     },
     Nft: {
       _id: "6368f5f2f8cad1a120e1bcf0",
@@ -82,9 +83,9 @@ export default function TicketScreen({ match }) {
             if (eventResponse.status) {
               setShowLoading(false);
               console.log(eventResponse);
-              // setTicket(eventResponse.data);
+              setTicket(eventResponse.data);
               setQRSecret(secretResponse.secret);
-              setQRValue({ secret: secretResponse.secret, event_data_id: ticket.Ticket._id });
+              setQRValue({ ticket_id: ticket.Ticket._id });
             } else {
               setShowLoading(false);
               console.log("api error");
@@ -101,8 +102,14 @@ export default function TicketScreen({ match }) {
         <div className="ticketscreen_eventcontainer">
           <div className="ticketscreen_eventcontainer_event">
             <div className="ticketscreen_nftcontainer_event">
-              <div style={{backgroundColor:"white"}} className="ticketscreen_nftcontainer_event_imagecontainer">
-                <QRCode size={128} value={ticket.Ticket._id} />
+              <div
+                style={{ backgroundColor: "white" }}
+                className="ticketscreen_nftcontainer_event_imagecontainer"
+              >
+                <QRCode
+                  size={128}
+                  value={JSON.stringify({ ticket_id: ticket.Ticket._id })}
+                />
               </div>
               <div className="ticketscreen_nftcontainer_event_detailscontainer">
                 <div className="ticketscreen_nftcontainer_event_detailscontainer_highlighttext">
@@ -117,9 +124,15 @@ export default function TicketScreen({ match }) {
                 <div className="ticketscreen_nftcontainer_event_detailscontainer_subtitle">
                   {"24 people have checked in"}
                 </div>
-                <div className="ticketscreen_nftcontainer_event_detailscontainer_buycontainer">
-                  Check In
-                </div>
+                {ticket.Ticket.attendance ? (
+                  <div className="ticketscreen_nftcontainer_event_detailscontainer_buycontainer text-green-400">
+                    Checked In
+                  </div>
+                ) : (
+                  <div className="ticketscreen_nftcontainer_event_detailscontainer_buycontainer">
+                    Check In
+                  </div>
+                )}
               </div>
             </div>
             <div className="ticketscreen_eventcontainer_event_detailscontainer_title mt-6">
@@ -131,21 +144,29 @@ export default function TicketScreen({ match }) {
                   <div className="ticketscreen_redeemablecontainer_text">
                     Claim your free {value}
                   </div>
-                  <div
-                    onClick={() => {
-                      setShowQR(true);
-                      setCValue(
-                        JSON.stringify({
-                          ticket_id: ticket.Ticket._id,
-                          claimable: value,
-                        })
-                      );
-                      // setCValue(`${ticket.Ticket._id},${value}`)
-                    }}
-                    className="ticketscreen_redeemablecontainer_button"
-                  >
-                    Show QR
-                  </div>
+                  {ticket.Ticket.claimed.includes(value) ? (
+                    <div
+                      className="ticketscreen_redeemablecontainer_button text-green-400"
+                    >
+                      Claimed
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        setShowQR(true);
+                        setCValue(
+                          JSON.stringify({
+                            ticket_id: ticket.Ticket._id,
+                            claimable: value,
+                          })
+                        );
+                        // setCValue(`${ticket.Ticket._id},${value}`)
+                      }}
+                      className="ticketscreen_redeemablecontainer_button"
+                    >
+                      Show QR
+                    </div>
+                  )}
                 </div>
               );
             })}

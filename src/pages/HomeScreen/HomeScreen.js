@@ -5,6 +5,7 @@ import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import Api from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
+import LandingBanner from "../../assets/LandingBanner.png";
 
 function HomeScreen() {
   const [tempData, setTempData] = useState([]);
@@ -40,9 +41,13 @@ function HomeScreen() {
   // };
   const history = useHistory();
   return (
-    <article className="homescreen">
+    <article
+      style={{ filter: showLoading ? "blur(10px)" : "none" }}
+      className="homescreen"
+    >
       <Loader showLoading={showLoading} />
       <section className="homescreen_herocontainer">
+        <img className="pr-6" src={LandingBanner} alt="Landing Banner"/>
         <div className="homescreen_herocontainer_title">Events</div>
         <div className="homescreen_eventscontainer">
           {tempData.map((event, index) => {

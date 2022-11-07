@@ -211,6 +211,48 @@ export default class Api {
       return err.response.data;
     }
   }
+  async markAttendance(ticketID) {
+    try {
+      const resp = await Axios({
+        method: "post",
+        url: this.backendURL + `/org/qr`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+        data: ticketID
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+  async claim(ticketID) {
+    try {
+      const resp = await Axios({
+        method: "post",
+        url: this.backendURL + `/org/claim`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+        data: ticketID
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
 
   async purchaseTicket(eventData) {
     try {

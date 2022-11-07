@@ -1,5 +1,5 @@
 .homescreen {
-  @apply pt-32;
+  @apply pt-28;
   height: 100%;
   overflow: scroll;
   // width: 100vw;
@@ -9,7 +9,7 @@
   &_herocontainer {
     @apply pl-6 w-full;
     &_title {
-      @apply text-2xl font-bold;
+      @apply text-2xl font-bold mt-6;
     }
   }
   &_eventscontainer {

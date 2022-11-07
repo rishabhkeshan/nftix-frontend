@@ -1,10 +1,12 @@
 
 .myticketsscreen{
-    @apply pt-32 mb-32;
+    @apply pt-32;
     width: 100vw;
     color: white;
     height: 100%;
     overflow-y: scroll;
+      margin-bottom: 148px;
+
     &_maincontainer{
         @apply px-6 w-full;
         &_createevent{
@@ -13,7 +15,7 @@
         }
     }
     &_eventscontainer{
-        @apply flex flex-col gap-5 mt-8;
+        @apply flex flex-col gap-5 mt-2;
         &_event{
             @apply flex flex-row w-full justify-start items-start rounded-xl;
             background-color: #1D2126;
@@ -29,10 +31,10 @@
                 color: #EB5757;
             }
             &_title{
-                @apply text-xs font-bold py-2;
+                @apply text-sm font-bold py-2;
             }
             &_subtitle{
-                font-size: 10px;
+                font-size: 12px;
                 @apply flex items-center text-center;
             }
             

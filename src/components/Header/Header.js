@@ -1,10 +1,12 @@
 import "./Header.scss";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useHistory } from "react-router-dom";
 import nftixLogo from "../../assets/nftix_logo_white.svg";
+import logout_icon from "../../assets/logout_icon.svg";
 
 export default function Header() {
   const [visible, setVisible] = useState(true);
+  const history = useHistory();
   const location = useLocation();
   const routePath = location.pathname;
   const [loggedIn, setLoggedIn] = useState(
@@ -35,9 +37,19 @@ export default function Header() {
       </div>
       {visible && (
         <div className="header_login">
-          <Link className="header_login_btn" to="/login">
-            {loggedIn ? username : "Login"}
-          </Link>
+          {loggedIn ? (
+            <div className="header_login_btn flex justify-center items-center text-lg font-semibold " to="/login">
+              {username}
+              <img onClick={()=>{
+                localStorage.clear();
+                history.push("/login");
+              }} className="w-8" src={logout_icon} alt="logout"/>
+            </div>
+          ) : (
+            <Link className="header_login_btn" to="/login">
+              Login
+            </Link>
+          )}
         </div>
       )}
     </div>
