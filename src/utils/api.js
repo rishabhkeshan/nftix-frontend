@@ -171,6 +171,46 @@ export default class Api {
       return err.response.data;
     }
   }
+  async getTicket(ticketID) {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/user/ticket/${ticketID}`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+  async getQRSecret() {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/user/qr`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
 
   async purchaseTicket(eventData) {
     try {

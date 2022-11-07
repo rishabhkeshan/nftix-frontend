@@ -2,6 +2,7 @@ import Modal from "@mui/material/Modal";
 import React, { useState } from "react";
 import nftix_logo from "../../assets/nftix_logo_white.svg";
 import { QrReader } from "react-qr-reader";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { useSnackbar } from "notistack";
 
 export default function QRScanModal({ showScanner }) {
@@ -37,8 +38,8 @@ const [data, setData] = useState("No result");
       className="align-middle justify-center items-center outline-none justify-items-center flex h-screen"
     >
       <div className="outline-none h-80 w-80">
-        <QrReader
-        scanDelay={5000}
+        {/* <QrReader
+          scanDelay={5000}
           onResult={(result, error) => {
             if (!!result) {
               setData(result?.text);
@@ -49,7 +50,17 @@ const [data, setData] = useState("No result");
               console.info(error);
             }
           }}
-          style={{ width: "100%", }}
+          style={{ width: "100%" }}
+        /> */}
+        <BarcodeScannerComponent
+          width={500}
+          height={500}
+          onUpdate={(err, result) => {
+            if (result){ 
+              showSuccessSnack(result?.text);
+              setData(result.text);}
+            else setData("Not Found");
+          }}
         />
       </div>
     </Modal>

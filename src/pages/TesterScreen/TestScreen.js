@@ -38,7 +38,9 @@ function TestScreen() {
 
   const transactMntl = async () => {
     console.log("transacting mntl");
-    await assetMantleClass.walletFromWords("");
+    await assetMantleClass.walletFromWords(
+      "knife invite churn goddess stable sunny rapid violin shrug clarify attend volcano tattoo crouch pipe unknown twelve crane penalty doctor enough crumble way provide"
+    );
     await assetMantleClass.transactMntl(
       "mantle1eespcw7hczhrtytcud8630pdh8x359zwhd7zhu",
       69000000
