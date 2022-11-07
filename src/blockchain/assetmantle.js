@@ -243,7 +243,7 @@ class AssetMantleFunctions {
     );
     const signedTemplated = await this.try(template);
     const response = await sendPostRequest(routes.tx, signedTemplated);
-    console.log(response.data);
+    console.log(response);
   }
 
   async createNubId(username) {
@@ -296,7 +296,7 @@ class AssetMantleFunctions {
 
   async getAccountBalance() {
     const resp = await getAccount(this.walletId);
-    return parseInt(resp.account.result.value.coins[0].amount)/1000000;
+    return parseInt(resp.account.result.value.coins[0].amount) / 1000000;
   }
 }
 

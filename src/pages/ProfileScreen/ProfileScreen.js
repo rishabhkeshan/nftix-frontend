@@ -1,14 +1,19 @@
 import "./ProfileScreen.scss";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 
 export default function ProfileScreen() {
   const [userData, setUserData] = useState({});
   const [balance, setBalance] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
       const data = JSON.parse(localStorage.getItem("deto"));
+      if (!data) {
+        history.push("/login");
+      }
       setUserData(data);
       const mantleFunctions = new AssetMantleFunctions(data.username);
       mantleFunctions.walletId = data.wallet_id;
