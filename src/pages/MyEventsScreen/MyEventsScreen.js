@@ -81,7 +81,14 @@ export default function MyEventsScreen() {
                 }}
                 className="eventsscreen_eventscontainer_event"
               >
-                <div className="eventsscreen_eventscontainer_event_imagecontainer"></div>
+                <div
+                  style={{
+                    backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                    backgroundPosition: "center",
+                    backgroundSize: "contain",
+                  }}
+                  className="eventsscreen_eventscontainer_event_imagecontainer"
+                ></div>
                 <div className="eventsscreen_eventscontainer_event_detailscontainer">
                   <div className="eventsscreen_eventscontainer_event_detailscontainer_highlighttext">
                     {event.date}

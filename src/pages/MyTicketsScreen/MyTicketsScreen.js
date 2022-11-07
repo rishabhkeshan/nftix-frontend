@@ -98,7 +98,14 @@ return (
               }}
               className="myticketsscreen_eventscontainer_event"
             >
-              <div className="myticketsscreen_eventscontainer_event_imagecontainer"></div>
+              <div
+                style={{
+                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                }}
+                className="myticketsscreen_eventscontainer_event_imagecontainer"
+              ></div>
               <div className="myticketsscreen_eventscontainer_event_detailscontainer">
                 <div className="myticketsscreen_eventscontainer_event_detailscontainer_highlighttext">
                   {event.date}

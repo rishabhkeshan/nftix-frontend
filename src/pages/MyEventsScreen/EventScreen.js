@@ -7,10 +7,10 @@ import Loader from "../../components/Loader/Loader";
 import { useLocation } from "react-router-dom";
 
 export default function EventScreen({ match }) {
-  const [showLoading,setShowLoading]=useState(true);
-    const location = useLocation();
-    const routePath = location.pathname;
-    const eventID = routePath.substring(routePath.lastIndexOf('/')+1);
+  const [showLoading, setShowLoading] = useState(true);
+  const location = useLocation();
+  const routePath = location.pathname;
+  const eventID = routePath.substring(routePath.lastIndexOf("/") + 1);
   useEffect(() => {
     console.log(routePath);
     console.log(eventID);
@@ -65,7 +65,14 @@ export default function EventScreen({ match }) {
                   {`Only ${event.event_info.tickets_available} seats left`}
                 </div>
               </div>
-              <div className="eventscreen_eventcontainer_event_imagecontainer"></div>
+              <div
+                style={{
+                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                }}
+                className="eventscreen_eventcontainer_event_imagecontainer"
+              ></div>
             </div>
             <div className="eventscreen_eventcontainer_event_detailscontainer_title mt-6">
               Event Details
@@ -77,7 +84,14 @@ export default function EventScreen({ match }) {
               Statistics
             </div>
             <div className="eventscreen_nftcontainer_event">
-              <div className="eventscreen_nftcontainer_event_imagecontainer"></div>
+              <div
+                style={{
+                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                }}
+                className="eventscreen_nftcontainer_event_imagecontainer"
+              ></div>
               <div className="eventscreen_nftcontainer_event_detailscontainer">
                 <div className="eventscreen_nftcontainer_event_detailscontainer_highlighttext">
                   {event.nft_info.date}

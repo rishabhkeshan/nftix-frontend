@@ -59,7 +59,14 @@ export default function EventBuyScreen({ match }) {
                   {`Only ${event.event_info.tickets_available} seats left`}
                 </div>
               </div>
-              <div className="eventbuyscreen_eventcontainer_event_imagecontainer"></div>
+              <div
+                style={{
+                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                }}
+                className="eventbuyscreen_eventcontainer_event_imagecontainer"
+              ></div>
             </div>
             <div className="eventbuyscreen_eventcontainer_event_detailscontainer_title mt-6">
               Event Details
@@ -71,7 +78,14 @@ export default function EventBuyScreen({ match }) {
               Ticket
             </div>
             <div className="eventbuyscreen_nftcontainer_event">
-              <div className="eventbuyscreen_nftcontainer_event_imagecontainer"></div>
+              <div
+                style={{
+                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                }}
+                className="eventbuyscreen_nftcontainer_event_imagecontainer"
+              ></div>
               <div className="eventbuyscreen_nftcontainer_event_detailscontainer">
                 <div className="eventbuyscreen_nftcontainer_event_detailscontainer_highlighttext">
                   {event.nft_info.date}

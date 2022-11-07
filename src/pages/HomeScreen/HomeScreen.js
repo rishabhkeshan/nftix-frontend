@@ -97,7 +97,14 @@ function HomeScreen() {
                 }}
                 className="homescreen_eventscontainer_event"
               >
-                <div className="homescreen_eventscontainer_event_imagecontainer"></div>
+                <div
+                  style={{
+                    backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                    backgroundPosition: "center",
+                    backgroundSize: "contain",
+                  }}
+                  className="homescreen_eventscontainer_event_imagecontainer"
+                ></div>
                 <div className="homescreen_eventscontainer_event_detailscontainer">
                   <div className="homescreen_eventscontainer_event_detailscontainer_highlighttext">
                     {event.date}
