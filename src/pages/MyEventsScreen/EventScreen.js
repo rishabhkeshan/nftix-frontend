@@ -1,11 +1,13 @@
 import "./EventScreen.scss";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
+import QRScanModal from "./QRScanModal";
 export default function EventScreen({ match }) {
   useEffect(() => {
     console.log(match.params.ticker);
   }, []);
+  const [showScanner, setShowScanner] = useState(false);
   const event = {
     event_info: {
       _id: "63667fe1e08d08237aefe57b",
@@ -28,7 +30,11 @@ export default function EventScreen({ match }) {
     },
   };
   return (
-    <article className="eventscreen">
+    <article
+      style={{ filter: showScanner ? "blur(10px)" : "none" }}
+      className="eventscreen"
+    >
+      <QRScanModal showScanner={showScanner} />
       <section className="eventscreen_maincontainer">
         <div className="eventscreen_eventcontainer">
           <div className="eventscreen_eventcontainer_event">
@@ -75,9 +81,14 @@ export default function EventScreen({ match }) {
                   {`36 people bought the ticket`}
                 </div>
                 <div className="eventscreen_nftcontainer_event_detailscontainer_subtitle">
-                  {'24 people have checked in'}
+                  {"24 people have checked in"}
                 </div>
-                <div className="eventscreen_nftcontainer_event_detailscontainer_buycontainer">
+                <div
+                  onClick={() => {
+                    setShowScanner(true);
+                  }}
+                  className="eventscreen_nftcontainer_event_detailscontainer_buycontainer"
+                >
                   Scan QR
                 </div>
               </div>
