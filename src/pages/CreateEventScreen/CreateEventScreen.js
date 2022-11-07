@@ -361,8 +361,8 @@ export default function CreateEventScreen() {
             value={NFTInputFields.price}
             typinputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             onChange={(e) =>
-              setEventInputFields({
-                ...eventInputFields,
+              setNFTInputFields({
+                ...NFTInputFields,
                 price: isNaN(parseInt(e.target.value, 10))
                   ? 0
                   : parseInt(e.target.value, 10),
