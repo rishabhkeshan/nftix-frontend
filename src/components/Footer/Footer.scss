@@ -1,5 +1,5 @@
 .footer{
-    @apply fixed w-screen flex items-center justify-between p-5 bottom-0 bg-black z-50;
+    @apply fixed w-screen flex flex-col items-center justify-between bottom-0 bg-black z-50;
     &_logo{
         &_img{
             height: 30px;

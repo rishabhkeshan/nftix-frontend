@@ -11,6 +11,7 @@ import ticket_icon_active from "../../assets/ticket_icon_active.svg";
 import about_icon_active from "../../assets/about_icon_active.svg";
 import event_icon_active from "../../assets/event_icon_active.svg";
 import profile_icon_active from "../../assets/profile_icon_active.svg";
+import am_logo from "../../assets/am_logo.svg";
 
 export default function Footer() {
   const [visible, setVisible] = useState(true);
@@ -30,7 +31,8 @@ export default function Footer() {
 
   return visible ? (
     <div className="footer">
-      <div className="footer_navcontainer">
+      <div className="flex justify-center items-center py-2 border-b w-full text-sm font-medium">Powered By <img className="w-24 ml-2" src={am_logo} alt="assetmantle"/></div>
+      <div className="footer_navcontainer p-3">
         <Link to="/" className="footer_navcontainer_tabcontainer">
           <img
             src={routePath === "/" ? home_icon_active : home_icon}
