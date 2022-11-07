@@ -66,7 +66,7 @@ function HomeScreen() {
                   style={{
                     backgroundImage: `url(${event.event_info.banner_url})`,
                     backgroundPosition: "center",
-                    backgroundSize: "contain",
+                    backgroundSize: "cover",
                   }}
                   className="homescreen_eventscontainer_event_imagecontainer"
                 ></div>

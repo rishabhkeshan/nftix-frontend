@@ -44,16 +44,16 @@ export default function EventBuyScreen({ match }) {
       mutableMetaProperties: "propertyName:S|AA=,type:S|asset",
       immutableMetaProperties:
         "URI:S|aHR0cHM6Ly9kZW1vLWFzc2V0bWFudGxlLm15cGluYXRhLmNsb3VkL2lwZnMvUW1ZZVRlZ1QyUWhaUFdnQTJxeUJUYW1tWDNpd1AyVllyaHcxaWo3OG5naWc5ei9Nb2JDb29sLnBuZw=,name:S|YXNkZg=,description:S|YXNkZg=,category:S|YXJ0cw",
-      name: "asdf",
-      description: "asdf",
-      claimable: ["adsf"],
+      name: "",
+      description: "",
+      claimable: [""],
       image:
         "https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png",
       org: "6368b298fbd38ea3f8b23444",
       properties: [
         {
-          propertyName: "asdf",
-          propertyValue: "asdf",
+          propertyName: "",
+          propertyValue: "",
         },
       ],
     },
@@ -132,7 +132,7 @@ export default function EventBuyScreen({ match }) {
       event.nft_info.image,
       event.nft_info.properties
     );
-    console.log(
+    showSuccessSnack(
       `https://devnet.explorer.assetmantle.one/transactions/${data.txhash}`
     );
     console.log(data);
@@ -196,7 +196,7 @@ export default function EventBuyScreen({ match }) {
                 style={{
                   backgroundImage: `url(${event.event_info.banner_url})`,
                   backgroundPosition: "center",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
                 className="eventbuyscreen_eventcontainer_event_imagecontainer"
               ></div>
@@ -215,7 +215,7 @@ export default function EventBuyScreen({ match }) {
                 style={{
                   backgroundImage: `url(${event.nft_info.image})`,
                   backgroundPosition: "center",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
                 className="eventbuyscreen_nftcontainer_event_imagecontainer"
               ></div>
@@ -227,11 +227,6 @@ export default function EventBuyScreen({ match }) {
                   {event.nft_info.name}
                 </div>
                 <div className="eventbuyscreen_nftcontainer_event_detailscontainer_subtitle">
-                  <img
-                    className="w-3 mr-1"
-                    src={location_icon}
-                    alt="location"
-                  />
                   {event.nft_info.description}
                 </div>
                 <div

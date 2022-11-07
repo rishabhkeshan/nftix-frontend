@@ -16,20 +16,20 @@ export default function EventScreen({ match }) {
   const api = new Api(localStorage.getItem("jwt"));
   const [event, setEvent] = useState({
     event_info: {
-      _id: "63667fe1e08d08237aefe57b",
-      name: "Abu Dhabi F1 GP Grand Prix 2022",
-      location: "California, USA",
+      _id: "",
+      name: "",
+      location: "",
       description:
-        "Specualte the finals between Hamilton and Verstappen live at Abu Dhabi, buy your tickets here!",
-      banner_url: "https://ggwp.com/lmao.png",
-      category: "fun",
-      organiser: "63667fd1e08d08237aefe579",
-      nft: "63667fe1e08d08237aefe57a",
-      tickets_available: 100,
+        "",
+      banner_url: "",
+      category: "",
+      organiser: "",
+      nft: "",
+      tickets_available: 0,
     },
     date: "Happening Now",
     nft_info: {
-      _id: "6368b96362f2b983959b2763",
+      _id: "",
       price: "10",
       toWallet: "mntl",
       event: "6368b96362f2b983959b2764",
@@ -47,12 +47,12 @@ export default function EventScreen({ match }) {
       description: "asdf",
       claimable: ["adsf"],
       image:
-        "https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png",
-      org: "6368b298fbd38ea3f8b23444",
+        "",
+      org: "",
       properties: [
         {
-          propertyName: "asdf",
-          propertyValue: "asdf",
+          propertyName: "",
+          propertyValue: "",
         },
       ],
     },
@@ -102,7 +102,7 @@ export default function EventScreen({ match }) {
                 style={{
                   backgroundImage: `url(${event.event_info.banner_url})`,
                   backgroundPosition: "center",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
                 className="eventscreen_eventcontainer_event_imagecontainer"
               ></div>
@@ -121,7 +121,7 @@ export default function EventScreen({ match }) {
                 style={{
                   backgroundImage: `url(${event.nft_info.image})`,
                   backgroundPosition: "center",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
                 className="eventscreen_nftcontainer_event_imagecontainer"
               ></div>
@@ -132,11 +132,14 @@ export default function EventScreen({ match }) {
                 <div className="eventscreen_nftcontainer_event_detailscontainer_title">
                   {event.nft_info.name}
                 </div>
-                <div className="eventscreen_nftcontainer_event_detailscontainer_subtitle">
+                {/* <div className="eventscreen_nftcontainer_event_detailscontainer_subtitle">
                   {`36 people bought the ticket`}
                 </div>
                 <div className="eventscreen_nftcontainer_event_detailscontainer_subtitle">
                   {"24 people have checked in"}
+                </div> */}
+                <div className="eventscreen_nftcontainer_event_detailscontainer_subtitle">
+                  {event.nft_info.description}
                 </div>
                 <div
                   onClick={() => {

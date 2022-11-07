@@ -49,7 +49,7 @@ export default function MyTicketsScreen() {
                   style={{
                     backgroundImage: `url(${event.Nft.image})`,
                     backgroundPosition: "center",
-                    backgroundSize: "contain",
+                    backgroundSize: "cover",
                   }}
                   className="myticketsscreen_eventscontainer_event_imagecontainer"
                 ></div>

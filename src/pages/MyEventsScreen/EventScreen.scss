@@ -53,16 +53,19 @@
       }
       &_detailscontainer {
         @apply p-2;
+        word-break: break-all;
+        max-width: 60%;
         &_highlighttext {
           font-size: 9px;
           color: #eb5757;
         }
         &_title {
-          @apply text-xs font-bold py-2;
+          @apply text-lg font-bold py-2;
+          word-break: break-all;
         }
         &_subtitle {
-          font-size: 10px;
-          @apply flex items-center text-center;
+          font-size: 12px;
+          @apply flex items-center text-left;
         }
 
         &_subtext {
@@ -71,8 +74,9 @@
           color: #a9a9a9;
         }
         &_buycontainer{
-            @apply flex justify-center items-center text-center p-3 text-sm mt-2 rounded-lg;
+            @apply flex justify-center items-center text-center p-3 text-lg mt-4 rounded-lg;
             background-color: #181b1f;
+      
         }
       }
     }

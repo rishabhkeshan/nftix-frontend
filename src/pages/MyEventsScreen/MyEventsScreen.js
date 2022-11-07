@@ -97,7 +97,7 @@ export default function MyEventsScreen() {
                   style={{
                     backgroundImage: `url(${event.banner_url})`,
                     backgroundPosition: "center",
-                    backgroundSize: "contain",
+                    backgroundSize: "cover",
                   }}
                   className="eventsscreen_eventscontainer_event_imagecontainer"
                 ></div>

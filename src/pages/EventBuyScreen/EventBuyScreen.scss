@@ -3,6 +3,7 @@
   height: 100%;
   overflow-y: scroll;
   width: 100vw;
+  margin-bottom: 148px;
   &_maincontainer {
     @apply px-6 w-full;
     &_title {
@@ -52,6 +53,7 @@
       }
       &_detailscontainer {
         @apply p-2;
+        max-width: 60%;
         &_highlighttext {
           font-size: 9px;
           color: #eb5757;
@@ -61,16 +63,16 @@
         }
         &_subtitle {
           font-size: 10px;
-          @apply flex items-center text-center;
+          @apply flex items-center text-left;
         }
 
         &_subtext {
           font-size: 10px;
-          @apply flex items-center text-center;
+          @apply flex items-center text-left;
           color: #a9a9a9;
         }
         &_buycontainer{
-            @apply flex justify-center items-center text-center p-3 text-sm mt-12 rounded-lg;
+            @apply flex justify-center items-center text-center p-3 text-sm mt-8 rounded-lg;
             background-color: #181b1f;
         }
       }
