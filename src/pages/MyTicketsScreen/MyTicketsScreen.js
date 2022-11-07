@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import redeemable_icon from "../../assets/redeemable_icon.svg";
+import transaction_icon from "../../assets/transaction_icon.svg";
 import Api from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
 
@@ -76,6 +77,18 @@ export default function MyTicketsScreen() {
                     />
                     {`Redeemables: ${event.Ticket.claimable.length}`}
                   </div>
+                  <div className="myticketsscreen_eventscontainer_event_detailscontainer_subtitle">
+                    <img
+                      className="w-3 mr-1"
+                      src={transaction_icon}
+                      alt="location"
+                    />
+                    {`Tx Hash: ${event.Ticket.userMintId.substring(
+                      0,
+                      4
+                    )}...${event.Ticket.userMintId.substring(0,-4)}`}
+                  </div>
+
                   {/* <div className="myticketsscreen_eventscontainer_event_detailscontainer_subtext">
                   <img className="w-3 mr-1" src={seat_icon} alt="seat" />
 

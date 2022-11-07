@@ -119,11 +119,9 @@ export default function TicketScreen({ match }) {
                   {ticket.Nft.name}
                 </div>
                 <div className="ticketscreen_nftcontainer_event_detailscontainer_subtitle">
-                  {`36 people bought the ticket`}
+                  {ticket.Nft.description}
                 </div>
-                <div className="ticketscreen_nftcontainer_event_detailscontainer_subtitle">
-                  {"24 people have checked in"}
-                </div>
+
                 {ticket.Ticket.attendance ? (
                   <div className="ticketscreen_nftcontainer_event_detailscontainer_buycontainer text-green-400">
                     Checked In
