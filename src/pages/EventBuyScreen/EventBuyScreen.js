@@ -148,7 +148,7 @@ export default function EventBuyScreen({ match }) {
       console.log("bought ticket!");
       showSuccessSnack("Your ticket has been purchased succesfully!");
       setShowLoading(false);
-      history.push("/mytickets")
+      history.push("/mytickets");
     } else {
       console.log("failure in buying ticket!");
       showErrorSnack("something went wrong in purchasing your ticket :(");
@@ -190,7 +190,7 @@ export default function EventBuyScreen({ match }) {
               </div>
               <div
                 style={{
-                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundImage: `url(${event.event_info.banner_url})`,
                   backgroundPosition: "center",
                   backgroundSize: "contain",
                 }}
@@ -209,7 +209,7 @@ export default function EventBuyScreen({ match }) {
             <div className="eventbuyscreen_nftcontainer_event">
               <div
                 style={{
-                  backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                  backgroundImage: `url(${event.nft_info.image})`,
                   backgroundPosition: "center",
                   backgroundSize: "contain",
                 }}

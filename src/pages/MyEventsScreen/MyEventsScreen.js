@@ -86,7 +86,7 @@ export default function MyEventsScreen() {
               >
                 <div
                   style={{
-                    backgroundImage: `url("https://demo-assetmantle.mypinata.cloud/ipfs/QmYeTegT2QhZPWgA2qyBTammX3iwP2VYrhw1ij78ngig9z/MobCool.png")`,
+                    backgroundImage: `url(${event.banner_url})`,
                     backgroundPosition: "center",
                     backgroundSize: "contain",
                   }}
