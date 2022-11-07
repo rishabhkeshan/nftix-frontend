@@ -136,24 +136,28 @@ export default function EventBuyScreen({ match }) {
       `https://devnet.explorer.assetmantle.one/transactions/${data.txhash}`
     );
     console.log(data);
-    await mantleFunctions.transactMntl(
-      event.nft_info.toWallet,
-      `${event.nft_info.price}000000`
-    );
-    const resp = await api.purchaseTicket({
-      event_id: event.event_info._id,
-      mint_id: data.txhash,
-    });
-    if (resp.status) {
-      console.log("bought ticket!");
-      showSuccessSnack("Your ticket has been purchased succesfully!");
-      setShowLoading(false);
-      history.push("/mytickets");
-    } else {
-      console.log("failure in buying ticket!");
-      showErrorSnack("something went wrong in purchasing your ticket :(");
-      setShowLoading(false);
-    }
+    setTimeout(async () => {
+      console.log(
+        await mantleFunctions.transactMntl(
+          event.nft_info.toWallet,
+          `${event.nft_info.price}000000`
+        )
+      );
+      const resp = await api.purchaseTicket({
+        event_id: event.event_info._id,
+        mint_id: data.txhash,
+      });
+      if (resp.status) {
+        console.log("bought ticket!");
+        showSuccessSnack("Your ticket has been purchased succesfully!");
+        setShowLoading(false);
+        history.push("/mytickets");
+      } else {
+        console.log("failure in buying ticket!");
+        showErrorSnack("something went wrong in purchasing your ticket :(");
+        setShowLoading(false);
+      }
+    }, 15000);
   };
   return (
     <article
