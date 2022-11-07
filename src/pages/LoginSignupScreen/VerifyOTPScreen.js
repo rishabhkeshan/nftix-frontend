@@ -9,7 +9,7 @@ import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
 
 function VerifyOTPScreen() {
-const location = useLocation();
+  const location = useLocation();
   const api = new Api();
   let history = useHistory();
 
@@ -17,6 +17,7 @@ const location = useLocation();
   const [OTPInputFields, setOTPInputFields] = useState({
     email: location.email,
     OTP: "",
+    username: location.username,
   });
 
   const { enqueueSnackbar } = useSnackbar();
@@ -50,8 +51,8 @@ const location = useLocation();
     const data = await api.verify(OTPInputFields);
     if (data.status) {
       localStorage.setItem("jwt", data.data.token);
-      localStorage.setItem("email", OTPInputFields.email);
-      showSuccessSnack("Sign up successful, JWT is with me bitch");
+      localStorage.setItem("username", OTPInputFields.username);
+      showSuccessSnack(`Signup successful! Welcome back ${OTPInputFields.username}`);
       history.push("/");
     }
   };

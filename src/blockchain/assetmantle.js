@@ -202,6 +202,17 @@ class AssetMantleFunctions {
     console.log("check faucet results", result);
   }
 
+  getMintTemplate(name, desc, image, propertiesArray) {
+    return generateMintRequest(
+      this.walletId,
+      this.nubID,
+      propertiesArray,
+      image,
+      name,
+      desc
+    );
+  }
+
   async mintToken(name, desc, image, propertiesArray) {
     const generatedTemplate = generateMintRequest(
       this.walletId,

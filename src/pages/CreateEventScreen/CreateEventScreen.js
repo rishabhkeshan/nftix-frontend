@@ -7,11 +7,17 @@ import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
 import plus_icon from "../../assets/plus_icon.svg";
 import NFTDropzone from "./NFTDropzone";
+import axios from "axios";
+import FormData from "form-data";
+import AssetMantleFunctions from "../../blockchain/assetmantle";
 export default function CreateEventScreen() {
-    const [contestImage, setContestImage] = useState(null);
-    const [nftImage, setNFTImage] = useState(null);
+  const [contestImage, setContestImage] = useState(null);
+  const [nftImage, setNFTImage] = useState(null);
   const api = new Api(localStorage.getItem("jwt"));
 
+  const mantleFunctions = new AssetMantleFunctions(
+    localStorage.getItem("email")
+  );
 
   const [eventInputFields, setEventInputFields] = useState({
     name: "",
@@ -65,12 +71,53 @@ export default function CreateEventScreen() {
   };
   const handleSubmit = async () => {
     console.log(NFTInputFields);
-    const payload = { event_info: eventInputFields, nft_info: NFTInputFields };
-    const data = await api.addEvent(payload);
-    if (data.status) {
-      showSuccessSnack(data.data);
+    if (nftImage && contestImage) {
+      let res = await handleUpload(nftImage, nftImage.name, true);
+      const nftImageUrl =
+        "https://demo-assetmantle.mypinata.cloud/ipfs/" +
+        res.IpfsHash +
+        "/" +
+        nftImage.name;
+      let res2 = await handleUpload(contestImage, contestImage.name, true);
+      const bannerImageUrl =
+        "https://demo-assetmantle.mypinata.cloud/ipfs/" +
+        res2.IpfsHash +
+        "/" +
+        contestImage.name;
+      console.log(nftImageUrl, bannerImageUrl);
+
+      const eif = eventInputFields;
+      const nif = NFTInputFields;
+
+      const walletId = JSON.parse(localStorage.getItem("deto")).wallet_id;
+      mantleFunctions.walletId = walletId;
+      eif.banner_url = bannerImageUrl;
+      nif.image = nftImageUrl;
+
+      const template = mantleFunctions.getMintTemplate(
+        nif.name,
+        nif.description,
+        nif.image,
+        nif.properties
+      );
+      nif.toID = template.value.toID;
+      nif.fromID = template.value.fromID;
+      nif.immutableMetaProperties = template.value.immutableMetaProperties;
+      nif.immutableProperties = template.value.immutableMetaProperties;
+      nif.mutableMetaProperties = template.value.mutableMetaProperties;
+      nif.mutableMetaProperties = template.value.mutableMetaProperties;
+      const payload = {
+        event_info: eventInputFields,
+        nft_info: NFTInputFields,
+      };
+      const data = await api.addEvent(payload);
+      if (data.status) {
+        showSuccessSnack(data.data);
+      } else {
+        showErrorSnack(data?.description);
+      }
     } else {
-      showErrorSnack(data?.description);
+      showErrorSnack("Please select images!");
     }
   };
   const _base64ToArrayBuffer = (base64) => {
@@ -84,18 +131,69 @@ export default function CreateEventScreen() {
   };
 
   const handleDrop = (file) => {
-    let reader = new window.FileReader();
-    reader.readAsDataURL(file.data);
-    reader.onloadend = () => {
-      let arrayBuff = null;
-      arrayBuff = _base64ToArrayBuffer(reader.result.split(",")[1]);
-      if (file.type === "contest") {
-        setContestImage(arrayBuff);
-      } else {
-        setNFTImage(arrayBuff);
-      }
-    };
+    if (file.type === "contest") {
+      setContestImage(file.data);
+    } else {
+      setNFTImage(file.data);
+    }
+    // let reader = new window.FileReader();
+    // reader.readAsDataURL(file.data);
+    // reader.onloadend = () => {
+    //   let arrayBuff = null;
+    //   arrayBuff = _base64ToArrayBuffer(reader.result.split(",")[1]);
+    //   if (file.type === "contest") {
+    //     setContestImage(arrayBuff);
+    //   } else {
+    //     setNFTImage(arrayBuff);
+    //   }
+    // };
   };
+
+  const getApiConfig = async () => {
+    const config = {
+      headers: {
+        "Content-Type": `multipart/form-data`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwMjYwZmRmYi1lZmRjLTRmZTktOGYwYi1jZjg4OTExOGFmMjkiLCJlbWFpbCI6InB1bmVldEBwZXJzaXN0ZW5jZS5vbmUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlfSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYTAyMWI1MWMzZWVlOGQ2NWU0MjciLCJzY29wZWRLZXlTZWNyZXQiOiJiNzQyMmQ5ZDNhNGQyNzViYmI0M2VhMDU1OTlmNzA2ODgzZTUxNjMyNzcxMjRiYjZlOWM5Yjg2YjBkZDBhNGUyIiwiaWF0IjoxNjM0NjQ5MTg4fQ.i514LU4xYYu95OvuZJ6vhWKgUqmXxnkhMMmDw-GmpCg`,
+      },
+    };
+    return config;
+  };
+
+  const handleUpload = async (selectedFiles, customName, wrapWithDirectory) => {
+    try {
+      const data = new FormData();
+      if (customName && customName !== "") {
+        const metadata = JSON.stringify({
+          name: customName,
+        });
+        data.append("pinataMetadata", metadata);
+      }
+
+      if (selectedFiles.length > 0) {
+        selectedFiles.forEach((file) => {
+          data.append(`file`, file);
+        });
+      } else {
+        data.append("file", selectedFiles, selectedFiles.name);
+      }
+      if (wrapWithDirectory === true) {
+        const pinataOptions = JSON.stringify({
+          wrapWithDirectory: true,
+        });
+        data.append("pinataOptions", pinataOptions);
+      }
+      const res = await axios.post(
+        `https://api.pinata.cloud/pinning/pinFileToIPFS`,
+        data,
+        await getApiConfig()
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      //  Handle error
+    }
+  };
+
   const inputStyle = {
     "& .MuiOutlinedInput-root": {
       "& > fieldset": {
@@ -123,7 +221,11 @@ export default function CreateEventScreen() {
 
         <div className="createventscreen_maincontainer_inputcontainer">
           <div className="flex justify-center items-center">
-            <NFTDropzone type={"contest"} handleDrop={handleDrop} height="h-80" />
+            <NFTDropzone
+              type={"contest"}
+              handleDrop={handleDrop}
+              height="h-80"
+            />
           </div>
           <div className="createventscreen_maincontainer_subtext justify-center items-center text-center m-0 p-0">
             Upload Event Banner

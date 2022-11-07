@@ -17,6 +17,8 @@ function HomeScreen() {
         if (resp.status) {
           if (resp.data.is_new) {
             history.push("/wallet-create");
+          }else{
+            localStorage.setItem("deto", JSON.stringify(resp.data))
           }
         }
       })();

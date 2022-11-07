@@ -53,7 +53,7 @@ function SignupScreen() {
         showSuccessSnack("OTP sent on email");
       }
       localStorage.setItem("xrc",loginInputFields.password);
-      history.push({ pathname: "/verify", email: loginInputFields.email });
+      history.push({ pathname: "/verify", email: loginInputFields.email, username: loginInputFields.username });
     }
   };
   const inputStyle = {

@@ -11,7 +11,7 @@ export default function WalletCreationScreen() {
     handleSubmit();
   }, []);
   const mantleFunctions = new AssetMantleFunctions(
-    localStorage.getItem("email")
+    localStorage.getItem("username")
   );
   const api = new Api(localStorage.getItem("jwt"));
   const [walletAddress, setWalletAddress] = useState("");
