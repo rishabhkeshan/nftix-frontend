@@ -55,6 +55,9 @@ function VerifyOTPScreen() {
       showSuccessSnack(`Welcome to nftix ${OTPInputFields.username}`);
       history.push("/");
     }
+    else{
+      showErrorSnack("User already exists/ Invaild OTP");
+    }
   };
   const inputStyle = {
     "& .MuiOutlinedInput-root": {
