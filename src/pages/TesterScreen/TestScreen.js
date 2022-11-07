@@ -1,7 +1,18 @@
+import { useEffect } from "react";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 
 function TestScreen() {
   const assetMantleClass = new AssetMantleFunctions("ggwp");
+
+  useEffect(() => {
+    (async () => {
+      await assetMantleClass.walletFromWords(
+        "knife invite churn goddess stable sunny rapid violin shrug clarify attend volcano tattoo crouch pipe unknown twelve crane penalty doctor enough crumble way provide"
+      );
+      const resp = await assetMantleClass.getAccountBalance();
+      console.log(resp);
+    })();
+  }, []);
 
   const createWallet = async () => {
     console.log("creating wallet");

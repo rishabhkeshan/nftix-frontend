@@ -1,8 +1,6 @@
 import "./HomeScreen.scss";
-import { Carousel } from "react-responsive-carousel";
-import ImageGallery from "react-image-gallery";
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import Api from "../../utils/api";
@@ -28,58 +26,16 @@ function HomeScreen() {
           }
         }
       })();
+    } else {
+      setShowLoading(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [dashboardModal, setDashboardModal] = useState(false);
-  const handleCloseSelectDashboard = () => {
-    setDashboardModal(false);
-  };
+  // const [dashboardModal, setDashboardModal] = useState(false);
+  // const handleCloseSelectDashboard = () => {
+  //   setDashboardModal(false);
+  // };
   const history = useHistory();
-  // const tempData = [
-  //   {
-  //     event_info: {
-  //       _id: "63667fe1e08d08237aefe57b",
-  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
-  //       location: "California, USA",
-  //       description: "gg event",
-  //       banner_url: "https://ggwp.com/lmao.png",
-  //       category: "fun",
-  //       organiser: "63667fd1e08d08237aefe579",
-  //       nft: "63667fe1e08d08237aefe57a",
-  //       tickets_available: 100,
-  //     },
-  //     date: "Happening Now",
-  //   },
-  //   {
-  //     event_info: {
-  //       _id: "63667fe1e08d08237aefe57b",
-  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
-  //       location: "California, USA",
-  //       description: "gg event",
-  //       banner_url: "https://ggwp.com/lmao.png",
-  //       category: "fun",
-  //       organiser: "63667fd1e08d08237aefe579",
-  //       nft: "63667fe1e08d08237aefe57a",
-  //       tickets_available: 100,
-  //     },
-  //     date: "Happening Now",
-  //   },
-  //   {
-  //     event_info: {
-  //       _id: "63667fe1e08d08237aefe57b",
-  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
-  //       location: "California, USA",
-  //       description: "gg event",
-  //       banner_url: "https://ggwp.com/lmao.png",
-  //       category: "fun",
-  //       organiser: "63667fd1e08d08237aefe579",
-  //       nft: "63667fe1e08d08237aefe57a",
-  //       tickets_available: 100,
-  //     },
-  //     date: "Happening Now",
-  //   },
-  // ];
-
   return (
     <article className="homescreen">
       <Loader showLoading={showLoading} />
