@@ -4,12 +4,16 @@ import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import QRScanModal from "./QRScanModal";
 import Loader from "../../components/Loader/Loader";
+import { useLocation } from "react-router-dom";
 
 export default function EventScreen({ match }) {
   const [showLoading,setShowLoading]=useState(true);
-
+    const location = useLocation();
+    const routePath = location.pathname;
+    const eventID = routePath.substring(routePath.lastIndexOf('/')+1);
   useEffect(() => {
-    console.log(match.params._id);
+    console.log(routePath);
+    console.log(eventID);
   }, []);
   const [showScanner, setShowScanner] = useState(false);
   const event = {
