@@ -7,9 +7,12 @@ export default function Header() {
   const [visible, setVisible] = useState(true);
   const location = useLocation();
   const routePath = location.pathname;
-  const [loggedIn,setLoggedIn] = useState(localStorage.getItem("jwt")!==null);
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("jwt") !== null
+  );
 
-  
+  const username = localStorage.getItem("username");
+
   useEffect(() => {
     setLoggedIn(localStorage.getItem("jwt") !== null);
     if (
@@ -17,14 +20,11 @@ export default function Header() {
       routePath === "/login" ||
       routePath === "/verify" ||
       routePath === "/wallet-create"
-    )
-    {
+    ) {
       setVisible(false);
       console.log("hi");
-    }
-    else
-    setVisible(true);
-  }, [location,localStorage]);
+    } else setVisible(true);
+  }, [location, localStorage]);
 
   return (
     <div className="header">
@@ -36,7 +36,7 @@ export default function Header() {
       {visible && (
         <div className="header_login">
           <Link className="header_login_btn" to="/login">
-            {loggedIn?"Rishabh":"Login"}
+            {loggedIn ? username : "Login"}
           </Link>
         </div>
       )}

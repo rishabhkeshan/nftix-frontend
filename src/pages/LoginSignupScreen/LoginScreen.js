@@ -10,7 +10,7 @@ import { useSnackbar } from "notistack";
 function LoginScreen() {
   const [dashboardModal, setDashboardModal] = useState(false);
   const [loginInputFields, setLoginInputFields] = useState({
-    email: "",
+    username: "",
     password: "",
     org_application: true,
   });
@@ -45,28 +45,27 @@ function LoginScreen() {
   const handleSubmit = async () => {
     console.log(loginInputFields);
     const data = await api.signup(loginInputFields);
-          if (data === "err") {
-            // localStorage.clear();
-            // localStorage.setItem(
-            //   "err",
-            //   "Something went wrong!"
-            // );
-            showErrorSnack("Something went wrong");
-            return;
-          }
+    if (data === "err") {
+      // localStorage.clear();
+      // localStorage.setItem(
+      //   "err",
+      //   "Something went wrong!"
+      // );
+      showErrorSnack("Something went wrong");
+      return;
+    }
     if (data.status) {
-      if(data.data.token){
-      localStorage.setItem("jwt", data.data.token);
-      localStorage.setItem("email", loginInputFields.email);
-      localStorage.setItem("xrc", loginInputFields.password);
-      showSuccessSnack("Login successful, JWT is with me bitch");
-      
-      history.push("/");
-      }
-      else{
+      if (data.data.token) {
+        localStorage.setItem("jwt", data.data.token);
+        localStorage.setItem("username", loginInputFields.username);
+        localStorage.setItem("xrc", loginInputFields.password);
+        showSuccessSnack(`Login successful! Welcome back ${loginInputFields.username}`);
+
+        history.push("/");
+      } else {
         showErrorSnack("Please check if you have an account");
       }
-    } else{
+    } else {
       showErrorSnack(data?.description);
       return;
     }
@@ -94,12 +93,12 @@ function LoginScreen() {
           <TextField
             id="outlined-basic"
             className="loginscreen_maincontainer_inputcontainer_inputfield"
-            label="Email"
-            value={loginInputFields.email}
+            label="Username"
+            value={loginInputFields.username}
             onChange={(e) =>
               setLoginInputFields({
                 ...loginInputFields,
-                email: e.target.value,
+                username: e.target.value,
               })
             }
             sx={inputStyle}
@@ -132,7 +131,12 @@ function LoginScreen() {
             <Link to="/signup">Sign up here</Link>
           </span>
         </div>
-        <div onClick={handleSubmit} className="loginscreen_bottomcontainer_btncontainer">Continue</div>
+        <div
+          onClick={handleSubmit}
+          className="loginscreen_bottomcontainer_btncontainer"
+        >
+          Continue
+        </div>
       </section>
     </article>
   );

@@ -6,7 +6,7 @@ import Api from "../../utils/api";
 
 export default function WalletCreationScreen() {
   const mantleFunctions = new AssetMantleFunctions(
-    localStorage.getItem("email")
+    localStorage.getItem("username")
   );
   const api = new Api(localStorage.getItem("jwt"));
   const [walletAddress, setWalletAddress] = useState("");
