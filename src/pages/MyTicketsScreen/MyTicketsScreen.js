@@ -77,16 +77,20 @@ export default function MyTicketsScreen() {
                     />
                     {`Redeemables: ${event.Ticket.claimable.length}`}
                   </div>
-                  <div className="myticketsscreen_eventscontainer_event_detailscontainer_subtitle">
+                  <div onClick={()=>{window.open(
+                    `https://devnet.explorer.assetmantle.one/transactions/${event.Ticket.userMintId}`,
+                    "_blank",
+                    "noopener,noreferrer"
+                  );}} className="myticketsscreen_eventscontainer_event_detailscontainer_subtitle underline">
                     <img
                       className="w-3 mr-1"
                       src={transaction_icon}
-                      alt="location"
+                      alt="transaction"
                     />
-                    {`Tx Hash: ${event.Ticket.userMintId.substring(
+                    {`Tx Hash: ${event.Ticket.userMintId.substr(
                       0,
                       4
-                    )}...${event.Ticket.userMintId.substring(0,-4)}`}
+                    )}...${event.Ticket.userMintId.substr(-4)}`}
                   </div>
 
                   {/* <div className="myticketsscreen_eventscontainer_event_detailscontainer_subtext">

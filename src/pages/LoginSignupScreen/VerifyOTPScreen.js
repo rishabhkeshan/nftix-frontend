@@ -52,7 +52,7 @@ function VerifyOTPScreen() {
     if (data.status) {
       localStorage.setItem("jwt", data.data.token);
       localStorage.setItem("username", OTPInputFields.username);
-      showSuccessSnack(`Signup successful! Welcome back ${OTPInputFields.username}`);
+      showSuccessSnack(`Welcome to nftix ${OTPInputFields.username}`);
       history.push("/");
     }
   };

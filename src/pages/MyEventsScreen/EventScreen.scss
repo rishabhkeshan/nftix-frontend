@@ -32,12 +32,12 @@
         }
         &_subtitle {
           font-size: 16px;
-          @apply flex items-center;
+          @apply flex items-center text-left; 
         }
 
         &_subtext {
           font-size: 16px;
-          @apply flex items-center text-center;
+          @apply flex items-center text-left;
           color: #a9a9a9;
         }
       }
@@ -60,7 +60,7 @@
           color: #eb5757;
         }
         &_title {
-          @apply text-lg font-bold py-2;
+          @apply text-lg font-bold py-2 text-left;
           word-break: break-all;
         }
         &_subtitle {
@@ -70,7 +70,7 @@
 
         &_subtext {
           font-size: 10px;
-          @apply flex items-center text-center;
+          @apply flex items-center text-left;
           color: #a9a9a9;
         }
         &_buycontainer{

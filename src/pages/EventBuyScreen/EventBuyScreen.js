@@ -133,7 +133,7 @@ export default function EventBuyScreen({ match }) {
       event.nft_info.properties
     );
     showSuccessSnack(
-      `https://devnet.explorer.assetmantle.one/transactions/${data.txhash}`
+      `dev...assetmantle.one/tr..ons/${data.txhash.substring(0,4)}`
     );
     console.log(data);
     setTimeout(async () => {

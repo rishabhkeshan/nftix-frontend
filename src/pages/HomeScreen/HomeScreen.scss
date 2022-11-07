@@ -1,8 +1,10 @@
 .homescreen {
   @apply pt-28;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
+  
   // width: 100vw;
+  margin-bottom: 148px;
   &::-webkit-scrollbar {
     display: none !important;
   }

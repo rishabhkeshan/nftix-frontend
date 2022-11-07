@@ -31,7 +31,7 @@ export default function Footer() {
 
   return visible ? (
     <div className="footer">
-      <div className="flex justify-center items-center py-2 border-b w-full text-sm font-medium">Powered By <img className="w-24 ml-2" src={am_logo} alt="assetmantle"/></div>
+      <div className="flex justify-center items-center py-2 border-b w-full text-xs font-medium">Powered By <img className="w-20 ml-2" src={am_logo} alt="assetmantle"/></div>
       <div className="footer_navcontainer p-3">
         <Link to="/" className="footer_navcontainer_tabcontainer">
           <img

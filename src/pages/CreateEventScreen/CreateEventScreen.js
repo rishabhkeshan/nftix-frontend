@@ -11,6 +11,9 @@ import axios from "axios";
 import FormData from "form-data";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 import Loader from "../../components/Loader/Loader";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
 
 export default function CreateEventScreen() {
   const [contestImage, setContestImage] = useState(null);
@@ -233,6 +236,7 @@ export default function CreateEventScreen() {
                 name: e.target.value,
               })
             }
+            inputProps={{ maxLength: 20 }}
             sx={inputStyle}
             variant="outlined"
             margin="dense"
@@ -248,6 +252,7 @@ export default function CreateEventScreen() {
                 description: e.target.value,
               })
             }
+            inputProps={{ maxLength: 50 }}
             sx={inputStyle}
             label="Event Description"
             variant="outlined"
@@ -265,6 +270,7 @@ export default function CreateEventScreen() {
               })
             }
             sx={inputStyle}
+            inputProps={{ maxLength: 10 }}
             label="Location"
             variant="outlined"
             margin="dense"
@@ -290,6 +296,7 @@ export default function CreateEventScreen() {
             id="outlined-basic"
             className="createventscreen_maincontainer_inputcontainer_inputfield"
             value={eventInputFields.tickets_available}
+            type={"number"}
             typinputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             onChange={(e) =>
               setEventInputFields({
@@ -318,6 +325,7 @@ export default function CreateEventScreen() {
             id="outlined-basic"
             className="createventscreen_maincontainer_inputcontainer_inputfield"
             label="NFT Name"
+            inputProps={{ maxLength: 20 }}
             value={NFTInputFields.name}
             onChange={(e) =>
               setNFTInputFields({
@@ -340,6 +348,7 @@ export default function CreateEventScreen() {
                 description: e.target.value,
               })
             }
+            inputProps={{ maxLength: 20 }}
             sx={inputStyle}
             label="NFT Description"
             variant="outlined"
@@ -358,6 +367,7 @@ export default function CreateEventScreen() {
               })
             }
             sx={inputStyle}
+            type={"number"}
             label="Price"
             variant="outlined"
             margin="dense"

@@ -39,6 +39,7 @@ export default function PasswordModal({ passwordModal, handleClose, submit }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           sx={inputStyle}
+          type={"password"}
           label="Password"
           variant="outlined"
           margin="dense"

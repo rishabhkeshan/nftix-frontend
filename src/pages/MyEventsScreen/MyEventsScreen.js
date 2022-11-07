@@ -24,6 +24,9 @@ export default function MyEventsScreen() {
         setShowLoading(false);
         console.log(data.data);
       }
+      else{
+        setShowLoading(false);
+      }
     })();
   }, []);
   // const tempData = [

@@ -24,7 +24,7 @@
         }
     }
     &_bottomcontainer{
-        @apply flex flex-col bottom-8 items-center justify-center w-full;
+        @apply flex mt-2 flex-col bottom-8 items-center justify-center w-full;
         &_textcontainer{
             @apply text-sm;
             &_highlighttext{

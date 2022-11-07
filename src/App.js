@@ -23,24 +23,26 @@ import WalletCreationScreen from "./pages/LoginSignupScreen/WalletCreationScreen
 
 const App = () => (
   <Router>
-    <Header />
-    <Switch>
-      <Route exact path="/" component={HomeScreen} />
-      <Route exact path="/login" component={LoginScreen} />
-      <Route exact path="/signup" component={SignupScreen} />
-      <Route exact path="/verify" component={VerifyOTPScreen} />
-      <Route exact path="/wallet-create" component={WalletCreationScreen} />
-      <Route exact path="/mytickets" component={MyTicketsScreen} />
-      <Route exact path="/myevents" component={MyEventsScreen} />
-      <Route exact path="/about" component={AboutScreen} />
-      <Route exact path="/profile" component={ProfileScreen} />
-      <Route exact path="/create" component={CreateEventScreen} />
-      <Route exact path="/event/:_id" component={EventBuyScreen} />
-      <Route exact path="/myevent/:_id" component={EventScreen} />
-      <Route exact path="/ticket/:_id" component={TicketScreen} />
-      <Route exact path="/test" component={TestScreen} />
-    </Switch>
-    <Footer />
+    <div className="app">
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/login" component={LoginScreen} />
+        <Route exact path="/signup" component={SignupScreen} />
+        <Route exact path="/verify" component={VerifyOTPScreen} />
+        <Route exact path="/wallet-create" component={WalletCreationScreen} />
+        <Route exact path="/mytickets" component={MyTicketsScreen} />
+        <Route exact path="/myevents" component={MyEventsScreen} />
+        <Route exact path="/about" component={AboutScreen} />
+        <Route exact path="/profile" component={ProfileScreen} />
+        <Route exact path="/create" component={CreateEventScreen} />
+        <Route exact path="/event/:_id" component={EventBuyScreen} />
+        <Route exact path="/myevent/:_id" component={EventScreen} />
+        <Route exact path="/ticket/:_id" component={TicketScreen} />
+        <Route exact path="/test" component={TestScreen} />
+      </Switch>
+      <Footer />
+    </div>
   </Router>
 );
 

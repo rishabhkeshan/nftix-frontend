@@ -43,9 +43,9 @@ export default function EventScreen({ match }) {
       mutableMetaProperties: "propertyName:S|AA=,type:S|asset",
       immutableMetaProperties:
         "URI:S|aHR0cHM6Ly9kZW1vLWFzc2V0bWFudGxlLm15cGluYXRhLmNsb3VkL2lwZnMvUW1ZZVRlZ1QyUWhaUFdnQTJxeUJUYW1tWDNpd1AyVllyaHcxaWo3OG5naWc5ei9Nb2JDb29sLnBuZw=,name:S|YXNkZg=,description:S|YXNkZg=,category:S|YXJ0cw",
-      name: "asdf",
-      description: "asdf",
-      claimable: ["adsf"],
+      name: "",
+      description: "",
+      claimable: [""],
       image:
         "",
       org: "",

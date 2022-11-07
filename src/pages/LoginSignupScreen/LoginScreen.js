@@ -117,6 +117,7 @@ function LoginScreen() {
               })
             }
             sx={inputStyle}
+            type={"password"}
             label="Password"
             variant="outlined"
             margin="dense"

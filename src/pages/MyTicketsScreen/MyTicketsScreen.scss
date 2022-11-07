@@ -31,16 +31,16 @@
                 color: #EB5757;
             }
             &_title{
-                @apply text-sm font-bold py-2;
+                @apply text-sm font-bold py-2 text-left;
             }
             &_subtitle{
                 font-size: 12px;
-                @apply flex items-center text-center;
+                @apply flex items-center text-left;
             }
             
             &_subtext{
                 font-size: 10px;
-                @apply flex items-center text-center;
+                @apply flex items-center text-left;
                 color: #A9A9A9;
             }
             

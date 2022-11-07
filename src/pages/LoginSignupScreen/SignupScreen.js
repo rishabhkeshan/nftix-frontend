@@ -87,6 +87,7 @@ function SignupScreen() {
               })
             }
             label="Email"
+            type={"email"}
             sx={inputStyle}
             variant="outlined"
             margin="dense"
@@ -103,6 +104,7 @@ function SignupScreen() {
               })
             }
             label="Username"
+            type={"text"}
             sx={inputStyle}
             variant="outlined"
             margin="dense"
@@ -120,6 +122,7 @@ function SignupScreen() {
             }
             sx={inputStyle}
             label="Password"
+            type={"password"}
             variant="outlined"
             margin="dense"
             fullWidth
