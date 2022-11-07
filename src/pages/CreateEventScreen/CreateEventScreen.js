@@ -10,14 +10,14 @@ import NFTDropzone from "./NFTDropzone";
 import axios from "axios";
 import FormData from "form-data";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
+import Loader from "../../components/Loader/Loader";
+
 export default function CreateEventScreen() {
   const [contestImage, setContestImage] = useState(null);
   const [nftImage, setNFTImage] = useState(null);
-  const api = new Api(localStorage.getItem("jwt"));
+  const [showLoading, setShowLoading] = useState(false);
 
-  const mantleFunctions = new AssetMantleFunctions(
-    localStorage.getItem("email")
-  );
+  const api = new Api(localStorage.getItem("jwt"));
 
   const [eventInputFields, setEventInputFields] = useState({
     name: "",
@@ -31,7 +31,7 @@ export default function CreateEventScreen() {
   const [NFTInputFields, setNFTInputFields] = useState({
     name: "",
     description: "",
-    price:"",
+    price: "10",
     claimable: [""],
     properties: [{ propertyName: "", propertyValue: "" }],
     image: "https://in.bmscdn.com/webin/movies/superstar/rewards_login.png",
@@ -71,6 +71,10 @@ export default function CreateEventScreen() {
     });
   };
   const handleSubmit = async () => {
+    setShowLoading(true);
+    const mantleFunctions = new AssetMantleFunctions(
+      localStorage.getItem("email")
+    );
     console.log(NFTInputFields);
     if (nftImage && contestImage) {
       let res = await handleUpload(nftImage, nftImage.name, true);
@@ -113,22 +117,16 @@ export default function CreateEventScreen() {
       };
       const data = await api.addEvent(payload);
       if (data.status) {
+        setShowLoading(false);
         showSuccessSnack(data.data);
+        history.push("/myevents")
       } else {
+        setShowLoading(false);
         showErrorSnack(data?.description);
       }
     } else {
       showErrorSnack("Please select images!");
     }
-  };
-  const _base64ToArrayBuffer = (base64) => {
-    var binary_string = window.atob(base64);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes.buffer;
   };
 
   const handleDrop = (file) => {
@@ -137,17 +135,6 @@ export default function CreateEventScreen() {
     } else {
       setNFTImage(file.data);
     }
-    // let reader = new window.FileReader();
-    // reader.readAsDataURL(file.data);
-    // reader.onloadend = () => {
-    //   let arrayBuff = null;
-    //   arrayBuff = _base64ToArrayBuffer(reader.result.split(",")[1]);
-    //   if (file.type === "contest") {
-    //     setContestImage(arrayBuff);
-    //   } else {
-    //     setNFTImage(arrayBuff);
-    //   }
-    // };
   };
 
   const getApiConfig = async () => {
@@ -213,6 +200,7 @@ export default function CreateEventScreen() {
   return (
     <article className="createventscreen">
       <section className="createventscreen_maincontainer">
+        <Loader showLoading={showLoading} />
         <div className="createventscreen_maincontainer_title">
           Create an Event
         </div>
