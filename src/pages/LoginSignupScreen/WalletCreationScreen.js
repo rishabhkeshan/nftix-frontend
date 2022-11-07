@@ -4,9 +4,12 @@ import CryptoJS from "crypto-js";
 import AssetMantleFunctions from "../../blockchain/assetmantle";
 import Api from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
+import { useHistory } from "react-router-dom";
 
 export default function WalletCreationScreen() {
   const [showLoading, setShowLoading] = useState(false);
+  const [seedphraseDownloaded, setSeedphraseDownloaded] = useState(false);
+  const history = useHistory();
   useEffect(() => {
     handleSubmit();
   }, []);
@@ -67,10 +70,26 @@ export default function WalletCreationScreen() {
       </section>
       <section className="loginscreen_bottomcontainer">
         <div
-          onClick={downloadTxtFile}
+          onClick={()=>{
+            downloadTxtFile();
+            setSeedphraseDownloaded(true);
+          }}
+          style={{ fontSize: "16px" }}
+          className="loginscreen_maincontainer_subtitle underline cursor-pointer "
+        >
+          Download Seed Phrase
+        </div>
+        <div
+          onClick={() => {
+            history.push("/");
+          }}
+          style={{
+            opacity: seedphraseDownloaded ? "100%" : "50%",
+            pointerEvents: seedphraseDownloaded ? "auto" : "none",
+          }}
           className="loginscreen_bottomcontainer_btncontainer"
         >
-          Download JSON
+          Attend Events Now!
         </div>
       </section>
     </article>
