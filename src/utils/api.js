@@ -1,6 +1,6 @@
 import Axios from "axios";
 export default class Api {
-  backendURL = "https://ebpf.benro.dev";
+  backendURL = "http://localhost:8000";
   constructor(token) {
     this.jwt = token;
   }
@@ -114,6 +114,27 @@ export default class Api {
       const resp = await Axios({
         method: "get",
         url: this.backendURL + `/org/event`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+
+  async getAllEvents() {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/user/events`,
         headers: {
           Authorization: `Bearer ${this.jwt}`,
         },

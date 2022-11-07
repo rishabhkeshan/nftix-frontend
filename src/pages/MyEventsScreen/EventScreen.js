@@ -3,9 +3,13 @@ import React, { useEffect, useState } from "react";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import QRScanModal from "./QRScanModal";
+import Loader from "../../components/Loader/Loader";
+
 export default function EventScreen({ match }) {
+  const [showLoading,setShowLoading]=useState(true);
+
   useEffect(() => {
-    console.log(match.params.ticker);
+    console.log(match.params._id);
   }, []);
   const [showScanner, setShowScanner] = useState(false);
   const event = {
