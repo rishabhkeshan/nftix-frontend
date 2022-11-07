@@ -31,6 +31,7 @@ export default function CreateEventScreen() {
   const [NFTInputFields, setNFTInputFields] = useState({
     name: "",
     description: "",
+    price:"",
     claimable: [""],
     properties: [{ propertyName: "", propertyValue: "" }],
     image: "https://in.bmscdn.com/webin/movies/superstar/rewards_login.png",
@@ -350,6 +351,25 @@ export default function CreateEventScreen() {
             }
             sx={inputStyle}
             label="NFT Description"
+            variant="outlined"
+            margin="dense"
+            fullWidth
+          />
+          <TextField
+            id="outlined-basic"
+            className="createventscreen_maincontainer_inputcontainer_inputfield"
+            value={NFTInputFields.price}
+            typinputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            onChange={(e) =>
+              setEventInputFields({
+                ...eventInputFields,
+                price: isNaN(parseInt(e.target.value, 10))
+                  ? 0
+                  : parseInt(e.target.value, 10),
+              })
+            }
+            sx={inputStyle}
+            label="Price"
             variant="outlined"
             margin="dense"
             fullWidth

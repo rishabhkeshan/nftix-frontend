@@ -45,7 +45,6 @@ const [data, setData] = useState("No result");
               console.log(result?.text);
               showSuccessSnack(result?.text);
             }
-
             if (!!error) {
               console.info(error);
             }
