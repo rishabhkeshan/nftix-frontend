@@ -11,7 +11,7 @@ function TestScreen() {
   const mintToken = async () => {
     console.log("minting token");
     await assetMantleClass.walletFromWords(
-      ""
+      "knife invite churn goddess stable sunny rapid violin shrug clarify attend volcano tattoo crouch pipe unknown twelve crane penalty doctor enough crumble way provide"
     );
     const propertiesArray = [
       { propertyName: "location", propertyValue: "ggwp" },
@@ -27,9 +27,7 @@ function TestScreen() {
 
   const transactMntl = async () => {
     console.log("transacting mntl");
-    await assetMantleClass.walletFromWords(
-      ""
-    );
+    await assetMantleClass.walletFromWords("");
     await assetMantleClass.transactMntl(
       "mantle1eespcw7hczhrtytcud8630pdh8x359zwhd7zhu",
       69000000

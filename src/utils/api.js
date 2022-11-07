@@ -109,7 +109,7 @@ export default class Api {
       return err.response.data;
     }
   }
-  async getEvent(eventData) {
+  async getOrgEvent() {
     try {
       const resp = await Axios({
         method: "get",
@@ -138,6 +138,49 @@ export default class Api {
         headers: {
           Authorization: `Bearer ${this.jwt}`,
         },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+
+  async getEvent(eventId) {
+    try {
+      const resp = await Axios({
+        method: "get",
+        url: this.backendURL + `/user/event/${eventId}`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+      });
+      return resp.data;
+    } catch (err) {
+      if (!err.response) {
+        return "err";
+      }
+      if (err.response.status === 500 || err.response.status === 401) {
+        return "err";
+      }
+      return err.response.data;
+    }
+  }
+
+  async purchaseTicket(eventData) {
+    try {
+      const resp = await Axios({
+        method: "post",
+        url: this.backendURL + `/user/ticket`,
+        headers: {
+          Authorization: `Bearer ${this.jwt}`,
+        },
+        data: eventData,
       });
       return resp.data;
     } catch (err) {

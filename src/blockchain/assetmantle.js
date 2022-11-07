@@ -101,7 +101,7 @@ const generateMintRequest = (
       mutableProperties: "burn:H|1,lock:H|1",
       immutableProperties: "style:S|Blue",
       mutableMetaProperties: `propertyName:S|${getBase64(
-        propertiesArray
+        JSON.stringify(propertiesArray)
       )},type:S|asset`,
       immutableMetaProperties: `URI:S|${getBase64(imageURL)},name:S|${getBase64(
         name
@@ -213,15 +213,16 @@ class AssetMantleFunctions {
     );
   }
 
-  async mintToken(name, desc, image, propertiesArray) {
+  async mintToken(name, desc, image, propInput) {
     const generatedTemplate = generateMintRequest(
       this.walletId,
       this.nubID,
-      propertiesArray,
+      propInput,
       image,
       name,
       desc
     );
+    console.log(generatedTemplate);
     const txsTemplate = await sendPostRequest(routes.mint, generatedTemplate);
     const tx = {
       msg: txsTemplate.value.msg,
@@ -230,7 +231,8 @@ class AssetMantleFunctions {
     };
     const signedTemplated = await this.try(tx);
     const response = await sendPostRequest(routes.tx, signedTemplated);
-    console.log(response.data);
+    console.log(response);
+    return response;
   }
 
   async transactMntl(toAddress, umntl) {

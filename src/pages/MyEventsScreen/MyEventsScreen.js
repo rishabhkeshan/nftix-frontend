@@ -4,64 +4,67 @@ import { Link, useHistory } from "react-router-dom";
 import location_icon from "../../assets/location_icon.svg";
 import seat_icon from "../../assets/seat_icon.svg";
 import Api from "../../utils/api";
+import Loader from "../../components/Loader/Loader";
 
 export default function MyEventsScreen() {
   const api = new Api(localStorage.getItem("jwt"));
+  const [tempData, setTempData] = useState([]);
   const [eventsData, setEventsData] = useState("");
   const history = useHistory();
   useEffect(() => {
     (async () => {
-      const data = await api.getEvent();
+      const data = await api.getOrgEvent();
+      console.log(data.data);
       if (data.status) {
-        setEventsData(data.data);
+        setTempData(data.data);
         console.log(data.data);
       }
     })();
   }, []);
-  const tempData = [
-    {
-      event_info: {
-        _id: "63667fe1e08d08237aefe57b",
-        name: "Abu Dhabi F1 GP Grand Prix 2022",
-        location: "California, USA",
-        description: "gg event",
-        banner_url: "https://ggwp.com/lmao.png",
-        category: "fun",
-        organiser: "63667fd1e08d08237aefe579",
-        nft: "63667fe1e08d08237aefe57a",
-        tickets_available: 100,
-      },
-      date: "Happening Now",
-    },
-    {
-      event_info: {
-        _id: "63667fe1e08d08237aefe57b",
-        name: "Abu Dhabi F1 GP Grand Prix 2022",
-        location: "California, USA",
-        description: "gg event",
-        banner_url: "https://ggwp.com/lmao.png",
-        category: "fun",
-        organiser: "63667fd1e08d08237aefe579",
-        nft: "63667fe1e08d08237aefe57a",
-        tickets_available: 100,
-      },
-      date: "Happening Now",
-    },
-    {
-      event_info: {
-        _id: "63667fe1e08d08237aefe57b",
-        name: "Abu Dhabi F1 GP Grand Prix 2022",
-        location: "California, USA",
-        description: "gg event",
-        banner_url: "https://ggwp.com/lmao.png",
-        category: "fun",
-        organiser: "63667fd1e08d08237aefe579",
-        nft: "63667fe1e08d08237aefe57a",
-        tickets_available: 100,
-      },
-      date: "Happening Now",
-    },
-  ];
+  // const tempData = [
+  //   {
+  //     event_info: {
+  //       _id: "63667fe1e08d08237aefe57b",
+  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
+  //       location: "California, USA",
+  //       description: "gg event",
+  //       banner_url: "https://ggwp.com/lmao.png",
+  //       category: "fun",
+  //       organiser: "63667fd1e08d08237aefe579",
+  //       nft: "63667fe1e08d08237aefe57a",
+  //       tickets_available: 100,
+  //     },
+  //     date: "Happening Now",
+  //   },
+  //   {
+  //     event_info: {
+  //       _id: "63667fe1e08d08237aefe57b",
+  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
+  //       location: "California, USA",
+  //       description: "gg event",
+  //       banner_url: "https://ggwp.com/lmao.png",
+  //       category: "fun",
+  //       organiser: "63667fd1e08d08237aefe579",
+  //       nft: "63667fe1e08d08237aefe57a",
+  //       tickets_available: 100,
+  //     },
+  //     date: "Happening Now",
+  //   },
+  //   {
+  //     event_info: {
+  //       _id: "63667fe1e08d08237aefe57b",
+  //       name: "Abu Dhabi F1 GP Grand Prix 2022",
+  //       location: "California, USA",
+  //       description: "gg event",
+  //       banner_url: "https://ggwp.com/lmao.png",
+  //       category: "fun",
+  //       organiser: "63667fd1e08d08237aefe579",
+  //       nft: "63667fe1e08d08237aefe57a",
+  //       tickets_available: 100,
+  //     },
+  //     date: "Happening Now",
+  //   },
+  // ];
 
   return (
     <div className="eventsscreen">
@@ -75,7 +78,7 @@ export default function MyEventsScreen() {
               <div
                 onClick={() => {
                   history.push({
-                    pathname: `/myevent/${event.event_info._id}`,
+                    pathname: `/myevent/${event._id}`,
                     event: event,
                   });
                 }}
@@ -94,7 +97,7 @@ export default function MyEventsScreen() {
                     {event.date}
                   </div>
                   <div className="eventsscreen_eventscontainer_event_detailscontainer_title">
-                    {event.event_info.name}
+                    {event.name}
                   </div>
                   <div className="eventsscreen_eventscontainer_event_detailscontainer_subtitle">
                     <img
@@ -102,12 +105,12 @@ export default function MyEventsScreen() {
                       src={location_icon}
                       alt="location"
                     />
-                    {event.event_info.location}
+                    {event.location}
                   </div>
                   <div className="eventsscreen_eventscontainer_event_detailscontainer_subtext">
                     <img className="w-3 mr-1" src={seat_icon} alt="seat" />
 
-                    {`Only ${event.event_info.tickets_available} seats left`}
+                    {`Only ${event.tickets_available} seats left`}
                   </div>
                 </div>
               </div>

@@ -29,6 +29,7 @@ export default function CreateEventScreen() {
     tickets_available: "",
   });
   const [NFTInputFields, setNFTInputFields] = useState({
+    toWallet: "",
     name: "",
     description: "",
     price: "10",
@@ -111,6 +112,8 @@ export default function CreateEventScreen() {
       nif.immutableProperties = template.value.immutableMetaProperties;
       nif.mutableMetaProperties = template.value.mutableMetaProperties;
       nif.mutableMetaProperties = template.value.mutableMetaProperties;
+      const user = JSON.parse(localStorage.getItem("deto"));
+      nif.toWallet = user.wallet_id;
       const payload = {
         event_info: eventInputFields,
         nft_info: NFTInputFields,
@@ -119,7 +122,7 @@ export default function CreateEventScreen() {
       if (data.status) {
         setShowLoading(false);
         showSuccessSnack(data.data);
-        history.push("/myevents")
+        history.push("/myevents");
       } else {
         setShowLoading(false);
         showErrorSnack(data?.description);

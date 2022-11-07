@@ -6,7 +6,7 @@ import Api from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
 
 export default function WalletCreationScreen() {
-  const [showLoading,setShowLoading]=useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   useEffect(() => {
     handleSubmit();
   }, []);
@@ -18,7 +18,7 @@ export default function WalletCreationScreen() {
   const [mnemonic, setMnemonic] = useState("");
   const encryptData = (payload) => {
     return CryptoJS.AES.encrypt(
-      payload,
+      JSON.stringify({ payload }),
       localStorage.getItem("xrc")
     ).toString();
   };
@@ -52,9 +52,7 @@ export default function WalletCreationScreen() {
     >
       <Loader showLoading={showLoading} />
       <section className="loginscreen_maincontainer">
-        <div className="loginscreen_maincontainer_title">
-          Wallet Address
-        </div>
+        <div className="loginscreen_maincontainer_title">Wallet Address</div>
         <div
           style={{ fontSize: "12px" }}
           className="loginscreen_maincontainer_textcontainer"
