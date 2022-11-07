@@ -21,13 +21,16 @@ function HomeScreen() {
           } else {
             localStorage.setItem("deto", JSON.stringify(resp.data));
             const data = await api.getAllEvents();
-            setTempData(data.data);
+            if (data.data) {
+              setTempData(data.data);
+            }
+
             setShowLoading(false);
           }
         }
       })();
     } else {
-      setShowLoading(false)
+      setShowLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

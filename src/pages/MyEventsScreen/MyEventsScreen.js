@@ -16,7 +16,9 @@ export default function MyEventsScreen() {
       const data = await api.getOrgEvent();
       console.log(data.data);
       if (data.status) {
-        setTempData(data.data);
+        if (data.data) {
+          setTempData(data.data);
+        }
         console.log(data.data);
       }
     })();

@@ -354,9 +354,7 @@ export default function CreateEventScreen() {
             onChange={(e) =>
               setNFTInputFields({
                 ...NFTInputFields,
-                price: isNaN(parseInt(e.target.value, 10))
-                  ? 0
-                  : parseInt(e.target.value, 10),
+                price: e.target.value,
               })
             }
             sx={inputStyle}

@@ -13,7 +13,9 @@ export default function MyTicketsScreen() {
     (async () => {
       const data = await api.getTickets();
       if (data.status) {
-        setTempData(data.data);
+        if (data.data) {
+          setTempData(data.data);
+        }
         console.log(data.data);
       }
     })();

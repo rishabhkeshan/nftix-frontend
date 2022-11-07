@@ -1,6 +1,6 @@
 import Axios from "axios";
 export default class Api {
-  backendURL = "http://localhost:8000";
+  backendURL = "https://ebpf-master.westus3.cloudapp.azure.com";
   constructor(token) {
     this.jwt = token;
   }
