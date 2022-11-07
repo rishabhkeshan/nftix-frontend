@@ -3,6 +3,8 @@ import fileUpload from "../../assets/file_upload_icon.svg";
 import "./Modal.css";
 import Dropzone, { useDropzone } from "react-dropzone";
 import { useSnackbar } from "notistack";
+import { NFTStorage, File } from "nft.storage";
+
 
 function NFTDropzone({
   type,
@@ -10,6 +12,9 @@ function NFTDropzone({
   height,
 }) {
   const maxSize = 31457280;
+    const NFT_STORAGE_TOKEN =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDJENjdBN2FjNzU5REE2QjhiYzg4NzIyZjIwQjdlMmRiYWI4NjAzQzAiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2ODQzMDQyNzAwOSwibmFtZSI6Im5mdGl4In0.85_ZNwHNdNWL2AuXUxFpnIzBsuxqbtcYJ_XmkRJ-ryg";
+    const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
   const [fileData, setFileData] = useState([]);
   const [errors, setErrors] = useState(null);
   const [previewImg, setPreviewImg] = useState(null);
@@ -48,6 +53,7 @@ function NFTDropzone({
       handleDrop(fileUploaded);
     }
   };
+
   const onDrop = async (acceptedFiles, fileRejections) => {
     console.log("accepted files", acceptedFiles);
     setFileData(acceptedFiles[0]);
@@ -79,6 +85,7 @@ function NFTDropzone({
   };
 
   return (
+    <>
     <Dropzone
       onDrop={onDrop}
       accept="image/*"
@@ -100,7 +107,7 @@ function NFTDropzone({
               }`,
             })}
           >
-            <input {...getInputProps()} />
+            <input type={"file"} {...getInputProps()} />
 
             {acceptedFiles[0] ? (
               <>
@@ -162,6 +169,7 @@ function NFTDropzone({
         );
       }}
     </Dropzone>
+    </>
   );
 }
 

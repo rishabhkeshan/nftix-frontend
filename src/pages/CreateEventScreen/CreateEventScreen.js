@@ -13,9 +13,15 @@ import AssetMantleFunctions from "../../blockchain/assetmantle";
 import Loader from "../../components/Loader/Loader";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { NFTStorage, File } from "nft.storage";
+// import { Web3Storage } from "web3.storage";
+
 
 
 export default function CreateEventScreen() {
+    const NFT_STORAGE_TOKEN =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDJENjdBN2FjNzU5REE2QjhiYzg4NzIyZjIwQjdlMmRiYWI4NjAzQzAiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2ODQzMDQyNzAwOSwibmFtZSI6Im5mdGl4In0.85_ZNwHNdNWL2AuXUxFpnIzBsuxqbtcYJ_XmkRJ-ryg";
+    const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
   const [contestImage, setContestImage] = useState(null);
   const [nftImage, setNFTImage] = useState(null);
   const [showLoading, setShowLoading] = useState(false);
@@ -82,17 +88,14 @@ export default function CreateEventScreen() {
     console.log(NFTInputFields);
     if (nftImage && contestImage) {
       let res = await handleUpload(nftImage, nftImage.name, true);
+      console.log(res);
       const nftImageUrl =
-        "https://demo-assetmantle.mypinata.cloud/ipfs/" +
-        res.IpfsHash +
-        "/" +
-        nftImage.name;
+        "https://demo-assetmantle.mypinata.cloud/ipfs" +
+        res.data.image.pathname.substring(1);
       let res2 = await handleUpload(contestImage, contestImage.name, true);
       const bannerImageUrl =
-        "https://demo-assetmantle.mypinata.cloud/ipfs/" +
-        res2.IpfsHash +
-        "/" +
-        contestImage.name;
+        "https://demo-assetmantle.mypinata.cloud/ipfs" +
+        res2.data.image.pathname.substring(1);
       console.log(nftImageUrl, bannerImageUrl);
 
       const eif = eventInputFields;
@@ -138,6 +141,7 @@ export default function CreateEventScreen() {
   const handleDrop = (file) => {
     if (file.type === "contest") {
       setContestImage(file.data);
+      // handleUpload(file.data,"hi.png");
     } else {
       setNFTImage(file.data);
     }
@@ -152,42 +156,67 @@ export default function CreateEventScreen() {
     };
     return config;
   };
+    const handleUpload = async (
+      selectedFiles,
+      customName
+    ) => {
+      // const toBeUploaded = new File([selectedFiles],customName);
+      console.log(customName);
+      console.log(selectedFiles);
+      // const someData = new Blob(["hello world"]);
+      // const res = await client.storeBlob(someData);
+      const res = await client.store({
+        name: customName,
+        description: NFTInputFields.description,
+        image: selectedFiles,
+      });
+      console.log(res);
+      return res;
+    };
+  // const handleUpload = async (selectedFiles, customName, wrapWithDirectory) => {
+  //   try {
+  //     const data = new FormData();
+  //     if (customName && customName !== "") {
+  //       const metadata = JSON.stringify({
+  //         name: customName,
+  //       });
+  //       data.append("pinataMetadata", metadata);
+  //     }
 
-  const handleUpload = async (selectedFiles, customName, wrapWithDirectory) => {
-    try {
-      const data = new FormData();
-      if (customName && customName !== "") {
-        const metadata = JSON.stringify({
-          name: customName,
-        });
-        data.append("pinataMetadata", metadata);
-      }
-
-      if (selectedFiles.length > 0) {
-        selectedFiles.forEach((file) => {
-          data.append(`file`, file);
-        });
-      } else {
-        data.append("file", selectedFiles, selectedFiles.name);
-      }
-      if (wrapWithDirectory === true) {
-        const pinataOptions = JSON.stringify({
-          wrapWithDirectory: true,
-        });
-        data.append("pinataOptions", pinataOptions);
-      }
-      const res = await axios.post(
-        `https://api.pinata.cloud/pinning/pinFileToIPFS`,
-        data,
-        await getApiConfig()
-      );
-      return res.data;
-    } catch (error) {
-      console.log(error);
-      //  Handle error
-    }
-  };
-
+  //     if (selectedFiles.length > 0) {
+  //       selectedFiles.forEach((file) => {
+  //         data.append(`file`, file);
+  //       });
+  //     } else {
+  //       data.append("file", selectedFiles, selectedFiles.name);
+  //     }
+  //     const res = await axios.post(
+  //       `https://api.pinata.cloud/pinning/pinFileToIPFS`,
+  //       data,
+  //       await getApiConfig()
+  //     );
+  //     return res.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //     //  Handle error
+  //   }
+  // };
+  // const handleUpload = async (selectedFiles, customName, wrapWithDirectory) => {
+  //   try {
+  //     // const toBeUploaded = new File([selectedFiles],customName);
+  //     console.log(customName);
+  //     console.log(selectedFiles);
+  //     const res = await client.put([selectedFiles], {
+  //       name: customName,
+  //       maxRetries: 3,
+  //     });
+  //     console.log(res.data);
+  //     return res.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //     //  Handle error
+  //   }
+  // };
   const inputStyle = {
     "& .MuiOutlinedInput-root": {
       "& > fieldset": {
