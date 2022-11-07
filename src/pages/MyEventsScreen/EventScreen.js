@@ -75,7 +75,7 @@ export default function EventScreen({ match }) {
       style={{ filter: showScanner ? "blur(10px)" : "none" }}
       className="eventscreen"
     >
-      <QRScanModal showScanner={showScanner} />
+      <QRScanModal showScanner={showScanner} setShowScanner={setShowScanner} />
       <section className="eventscreen_maincontainer">
         <div className="eventscreen_eventcontainer">
           <div className="eventscreen_eventcontainer_event">

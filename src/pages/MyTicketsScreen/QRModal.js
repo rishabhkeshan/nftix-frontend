@@ -4,9 +4,11 @@ import nftix_logo from "../../assets/nftix_logo_white.svg";
 import { QrReader } from "react-qr-reader";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { useSnackbar } from "notistack";
+import QRCode from "react-qr-code";
 
-export default function QRScanModal({ showScanner, setShowScanner }) {
-const [data, setData] = useState("No result");
+
+export default function QRModal({ showQR,setShowQR,cValue }) {
+  const [data, setData] = useState("No result");
   const { enqueueSnackbar } = useSnackbar();
   const showErrorSnack = (message) => {
     enqueueSnackbar(message, {
@@ -32,40 +34,20 @@ const [data, setData] = useState("No result");
   };
   return (
     <Modal
-      open={showScanner}
+      open={showQR}
       aria-labelledby="loader"
       aria-describedby="loading"
       className="align-middle justify-center items-center outline-none justify-items-center flex h-screen"
     >
       <div className="outline-none h-80 w-80 flex flex-col justify-center items-center">
-        {/* <QrReader
-          scanDelay={5000}
-          onResult={(result, error) => {
-            if (!!result) {
-              setData(result?.text);
-              console.log(result?.text);
-              showSuccessSnack(result?.text);
-            }
-            if (!!error) {
-              console.info(error);
-            }
-          }}
-          style={{ width: "100%" }}
-        /> */}
-        <BarcodeScannerComponent
-          width={500}
-          height={500}
-          onUpdate={(err, result) => {
-            if (result) {
-              showSuccessSnack(result?.text);
-              setData(result.text);
-            } else setData("Not Found");
-          }}
-        />
+        <div className="p-4 bg-white rounded-lg">
+          <QRCode size={256} value={cValue} />
+        </div>
+
         <div
           className="font-bold text-xl underline"
           onClick={() => {
-            setShowScanner(false);
+            setShowQR(false);
           }}
         >
           Close

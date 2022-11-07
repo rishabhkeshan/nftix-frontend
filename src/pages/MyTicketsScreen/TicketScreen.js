@@ -6,11 +6,14 @@ import QRCode from "react-qr-code";
 import { useLocation } from "react-router-dom";
 import Api from "../../utils/api";
 import { useSnackbar } from "notistack";
+import QRModal from "./QRModal";
 
 export default function TicketScreen({ match }) {
   const [showLoading, setShowLoading] = useState(true);
   const [QRSecret, setQRSecret] = useState("");
   const [QRValue, setQRValue] = useState({});
+  const [showQR, setShowQR]= useState(false);
+  const [cValue,setCValue] = useState({});
   const [ticket, setTicket] = useState({
     Ticket: {
       _id: "6368fe23f8cad1a120e1bcf8",
@@ -89,12 +92,16 @@ export default function TicketScreen({ match }) {
           })();
     }, []);
   return (
-    <article className="ticketscreen">
+    <article
+      style={{ filter: showQR ? "blur(10px)" : "none" }}
+      className="ticketscreen"
+    >
+      <QRModal showQR={showQR} setShowQR={setShowQR} cValue={cValue} />
       <section className="ticketscreen_maincontainer">
         <div className="ticketscreen_eventcontainer">
           <div className="ticketscreen_eventcontainer_event">
             <div className="ticketscreen_nftcontainer_event">
-              <div className="ticketscreen_nftcontainer_event_imagecontainer">
+              <div style={{backgroundColor:"white"}} className="ticketscreen_nftcontainer_event_imagecontainer">
                 <QRCode size={128} value={ticket.Ticket._id} />
               </div>
               <div className="ticketscreen_nftcontainer_event_detailscontainer">
@@ -124,7 +131,19 @@ export default function TicketScreen({ match }) {
                   <div className="ticketscreen_redeemablecontainer_text">
                     Claim your free {value}
                   </div>
-                  <div className="ticketscreen_redeemablecontainer_button">
+                  <div
+                    onClick={() => {
+                      setShowQR(true);
+                      setCValue(
+                        JSON.stringify({
+                          ticket_id: ticket.Ticket._id,
+                          claimable: value,
+                        })
+                      );
+                      // setCValue(`${ticket.Ticket._id},${value}`)
+                    }}
+                    className="ticketscreen_redeemablecontainer_button"
+                  >
                     Show QR
                   </div>
                 </div>

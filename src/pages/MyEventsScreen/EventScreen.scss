@@ -1,9 +1,9 @@
 .eventscreen {
   @apply pt-32;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100vw;
-  margin-bottom: 128px;
+  margin-bottom: 156px;
   &_maincontainer {
     @apply px-6 w-full;
     &_title {
